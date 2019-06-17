@@ -1,3 +1,4 @@
+/* TODO by Djer : devrait etre "fr.ag2r.bqm.groupeA" */
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
@@ -12,7 +13,6 @@ public class ProjetAApplication {
     /*
     @Override
     public void run(String... args) throws Exception {
-        // TODO Auto-generated method stub
     
         participantsRepository.save(new Participants("BELMOUMENE", "Mohammed", "CNAM", "moh@yahoo.fr", 5063,
                 "Directeur", "Experience 10 ans"));
