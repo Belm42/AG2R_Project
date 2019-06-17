@@ -3,9 +3,11 @@ package com.example.demo.entités;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
 import org.springframework.lang.NonNull;
@@ -43,8 +45,9 @@ public class Participants implements Serializable {
     @NonNull
     @Size(min = 5, max = 250)
     private String presentation;
-    //@ManyToOne 
-    // Evenement evenement = new Evenement();
+    // Un participant peut assister à plusieurs evenements.
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Evenement evenement;
 
     // Générer un constructeurs par défaut (Sans parametres) pour JPA.
     public Participants() {
@@ -52,7 +55,8 @@ public class Participants implements Serializable {
     }
 
     public Participants(String nom, String prenom, String entreprise, String mail, String tel, String fonction,
-            String presentation) {
+            String presentation, Evenement evenement) {
+        super();
         this.nom = nom;
         this.prenom = prenom;
         this.entreprise = entreprise;
@@ -60,6 +64,7 @@ public class Participants implements Serializable {
         this.tel = tel;
         this.fonction = fonction;
         this.presentation = presentation;
+        this.evenement = evenement;
     }
 
     /**

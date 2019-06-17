@@ -1,11 +1,16 @@
 package com.example.demo.entités;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import org.springframework.lang.NonNull;
@@ -22,7 +27,7 @@ public class Evenement implements Serializable {
     private String nomEvenement;
     @NonNull
     @Size(min = 1)
-    private String dateEvenement;
+    private Date dateEvenement;
     @NonNull
     @Size(min = 1)
     private Integer nombreParticipant;
@@ -32,19 +37,22 @@ public class Evenement implements Serializable {
     @NonNull
     @Size(min = 1)
     private Integer nombreTable;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
+    private List<Participants> participants;
 
-    private Evenement() {
+    public Evenement() {
         super();
     }
 
-    public Evenement(String nomEvenement, String dateEvenement, Integer nombreParticipant,
-            Integer nombreParticipantTable, Integer nombreTable) {
+    public Evenement(String nomEvenement, Date dateEvenement, Integer nombreParticipant, Integer nombreParticipantTable,
+            Integer nombreTable, List<Participants> participants) {
         super();
         this.nomEvenement = nomEvenement;
         this.dateEvenement = dateEvenement;
         this.nombreParticipant = nombreParticipant;
         this.nombreParticipantTable = nombreParticipantTable;
         this.nombreTable = nombreTable;
+        this.participants = participants;
     }
 
     /**
@@ -78,14 +86,14 @@ public class Evenement implements Serializable {
     /**
      * @return the dateEvenement
      */
-    public String getDateEvenement() {
+    public Date getDateEvenement() {
         return dateEvenement;
     }
 
     /**
      * @param dateEvenement the dateEvenement to set
      */
-    public void setDateEvenement(String dateEvenement) {
+    public void setDateEvenement(Date dateEvenement) {
         this.dateEvenement = dateEvenement;
     }
 
