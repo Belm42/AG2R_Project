@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Participants</title>
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- céation d'un tableau pour stocker les participants -->
+		<div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Liste des participants</div>
+				<div class="panel-body">
+				<form th :action="@{/user/index}" method="get"> <!--  post en version finale !!!! -->
+					<label> Recherche par nom</label> <input type="text" name="motCle"
+						th:value="${motCle}">
+					<button type="submit" class="btn btn-primary" > Chercher <img src="https://img.icons8.com/color/48/000000/search-property.png" width="23px"></button>
+					
+				</form>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>nom</th>
+							<th>Prenom</th>
+							<th>Entreprise</th>
+							<th>Mail</th>
+							<th>Tel</th>
+							<th>Fonction</th>
+							<th>Presentation</th>
+						</tr>
+						<tr th:each="p:${listeParticipants}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.nom}"></td>
+							<td th:text="${p.prenom}"></td>
+							<td th:text="${p.entreprise}"></td>
+							<td th:text="${p.mail}"></td>
+							<td th:text="${p.tel}"></td>
+							<td th:text="${p.fonction}"></td>
+							<td th:text="${p.presentation}"></td>
+
+							<td><a 
+								onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')"
+								th:href="@{/admin/delete(id=${p.id}, page=${currentPage}, motCle=${motCle})}" title="Delete">
+									<img src="https://img.icons8.com/color/48/000000/delete-forever.png"width="30px"></a></td>
+							<td><a 
+								th:href="@{/admin/edit(id=${p.id})}" title="Edit"> <img src="https://img.icons8.com/color/48/000000/create-new.png" width="30px"></a></td>
+						</tr>
+					</table>
+					<ul class="nav nav-pills">
+						<li th:class="${currentPage==status.index}?'active':''"
+							th:each="page,status:${pages}"><a
+							th:href="@{/user/index(page=${status.index}, motCle=${motCle})}"
+							th:text="${status.index}"></a></li>
+
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		</div>
+</body>
+</html>

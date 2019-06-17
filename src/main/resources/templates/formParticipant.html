@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Saisie d'un participant</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="container">
+			<div class="well" style="background-color: #A2D9CE">
+				<div class="row">
+					<div class="col-md-offset-2 col-md-6">
+						<h1>
+							Page d'inscription<br /> <small>Veuillez remplir tous
+								les champs SVP</small>
+						</h1>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="row">
+				<div class="col-xs-8">
+
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="/images/F1.jpg" alt="Los Angeles" style="width: 100%;">
+							</div>
+
+							<div class="item">
+								<img src="/images/F2.jpg" alt="Chicago" style="width: 100%;">
+							</div>
+
+							<div class="item">
+								<img src="/images/F3.jpg" alt="New york" style="width: 100%;">
+							</div>
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel"
+							data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left"></span> <span
+							class="sr-only">Previous</span>
+						</a> <a class="right carousel-control" href="#myCarousel"
+							data-slide="next"> <span
+							class="glyphicon glyphicon-chevron-right"></span> <span
+							class="sr-only">Next</span>
+						</a>
+					</div>
+					<br>
+					<div class="card">
+						<div class="card-body">
+						<h1> BQM Title</h1>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background-color: #A2D9CE">
+							Nouveau participant <img
+								src="https://img.icons8.com/color/48/000000/add-user-male.png"
+								width="25px">
+						</div>
+						<div class="panel-body">
+
+							<form th:action="@{/admin/save}" method="post">
+								<div class="form-group">
+
+
+
+									<label class="control-label">Nom </label>
+									<div class="input-group">
+										<span class="input-group-addon "><img src="https://img.icons8.com/color/48/000000/employee-card.png"
+											width="23px"></span>
+									 <input
+										class="form-control" type="text" name="nom"
+										pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+										th:value="${participants.nom}"> <span
+										th:errors="${participants.nom}" class="text-danger"> </span>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label">Prenom</label>
+									<div class="input-group">
+										<span class="input-group-addon "><img
+											src="https://img.icons8.com/color/48/000000/contact-card.png"
+											width="23px"></span> <input class="form-control" type="text"
+											name="prenom" pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+											th:value="${participants.prenom}"> <span
+											th:errors="${participants.prenom}" class="text-danger">
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Entreprise</label>
+									<div class="input-group">
+										<span class="input-group-addon "><img
+											src="https://img.icons8.com/color/48/000000/home.png"
+											width="23px"></span> <input class="form-control" type="text"
+											name="entreprise"
+											pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+											th:value="${participants.entreprise}"> <span
+											th:errors="${participants.entreprise}" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Email</label>
+									<div class="input-group">
+										<span class="input-group-addon"><img
+											src="https://img.icons8.com/color/48/000000/message-group.png"
+											width="23px"></span> <input class="form-control" type="email"
+											name="mail"
+											pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})"
+											th:value="${participants.mail}"> <span
+											th:errors="${participants.mail}" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Tel</label>
+									<div class="input-group">
+										<span class="input-group-addon "><img
+											src="https://img.icons8.com/color/48/000000/shake-phone.png"
+											width="23px"></span> <input class="form-control" type="text"
+											name="tel" pattern="[0][0-9]+" th:value="${participants.tel}">
+										<span th:errors="${participants.tel}" class="text-danger"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Fonction</label>
+									<div class="input-group">
+										<span class="input-group-addon"><img
+											src="https://img.icons8.com/color/48/000000/under-computer.png"
+											width="23px"></span> <input class="form-control" type="text"
+											name="fonction" th:value="${participants.fonction}">
+										<span th:errors="${participants.fonction}" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Presentation</label>
+									<div class="input-group">
+										<span class="input-group-addon"><img
+											src="https://img.icons8.com/color/48/000000/contract-job.png"
+											width="23px"></span> <input class="form-control" type="text"
+											name="presentation"
+											pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+											th:value="${participants.presentation}"> <span
+											th:errors="${participants.presentation}" class="text-danger"></span>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary">Enregistrer</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Section: Blog v.2 -->
+		<section class="text-center my-5">
+
+			<!-- Section heading -->
+			<h2 class="h1-responsive font-weight-bold my-5">Nos prochains
+				évènements</h2>
+			<!-- Section description -->
+			<p class="dark-grey-text w-responsive mx-auto mb-5">Duis aute
+				irure dolor in reprehenderit in voluptate velit esse cillum dolore
+				eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est
+				laborum.</p>
+
+			<!-- Grid row -->
+			<div class="row">
+
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
+
+					<!-- Featured image -->
+					<div class="view overlay rounded z-depth-2 mb-4">
+						<img class="img-fluid"
+							src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg"
+							alt="Sample image"> <a>
+							<div class="mask rgba-white-slight"></div>
+						</a>
+					</div>
+
+					<!-- Category -->
+					<a href="#!" class="pink-text">
+						<h6 class="font-weight-bold mb-3">
+							<i class="fas fa-map pr-2"></i>Réseau professionnel
+						</h6>
+					</a>
+					<!-- Post title -->
+					<h4 class="font-weight-bold mb-3">
+						<strong>Title of the news</strong>
+					</h4>
+					<!-- Post data -->
+					<p>
+						by <a class="font-weight-bold">Billy Forester</a>, 15/07/2019
+					</p>
+					<!-- Excerpt -->
+					<p class="dark-grey-text">Nam libero tempore, cum soluta nobis
+						est eligendi optio cumque nihil impedit quo minus id quod maxime
+						placeat facere possimus voluptas.</p>
+					<!-- Read more button -->
+					<a class="btn btn-success btn-rounded btn-md">Read more</a>
+
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-6 mb-md-0 mb-4">
+
+					<!-- Featured image -->
+					<div class="view overlay rounded z-depth-2 mb-4">
+						<img class="img-fluid"
+							src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+							alt="Sample image"> <a>
+							<div class="mask rgba-white-slight"></div>
+						</a>
+					</div>
+
+					<!-- Category -->
+					<a href="#!" class="deep-orange-text">
+						<h6 class="font-weight-bold mb-3">
+							<i class="fas fa-graduation-cap pr-2"></i>Maîtrise de temps
+						</h6>
+					</a>
+					<!-- Post title -->
+					<h4 class="font-weight-bold mb-3">
+						<strong>Title of the news</strong>
+					</h4>
+					<!-- Post data -->
+					<p>
+						by <a class="font-weight-bold">Billy Forester</a>, 13/09/2019
+					</p>
+					<!-- Excerpt -->
+					<p class="dark-grey-text">At vero eos et accusamus et iusto
+						odio dignissimos ducimus qui blanditiis voluptatum deleniti atque
+						corrupti quos dolores.</p>
+					<!-- Read more button -->
+					<a class="btn btn-warning btn-rounded btn-md">Read more</a>
+
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-6 mb-0">
+
+					<!-- Featured image -->
+					<div class="view overlay rounded z-depth-2 mb-4">
+						<img class="img-fluid"
+							src="https://mdbootstrap.com/img/Photos/Others/images/13.jpg"
+							alt="Sample image"> <a>
+							<div class="mask rgba-white-slight"></div>
+						</a>
+					</div>
+
+					<!-- Category -->
+					<a href="#!" class="blue-text">
+						<h6 class="font-weight-bold mb-3">
+							<i class="fas fa-fire pr-2"></i>Affaires & Business
+						</h6>
+					</a>
+					<!-- Post title -->
+					<h4 class="font-weight-bold mb-3">
+						<strong>Title of the news</strong>
+					</h4>
+					<!-- Post data -->
+					<p>
+						by <a class="font-weight-bold">Billy Forester</a>, 11/08/2019
+					</p>
+					<!-- Excerpt -->
+					<p class="dark-grey-text">Nemo enim ipsam voluptatem quia
+						voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+						magni dolores eos qui ratione.</p>
+					<!-- Read more button -->
+					<a class="btn btn-info btn-rounded btn-md">Read more</a>
+
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row -->
+
+		</section>
+		<!-- Section: Blog v.2 -->
+
+	</div>
+
+
+
+</body>
+</html>

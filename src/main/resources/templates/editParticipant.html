@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Saisie d'un participant</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="col-md-6">
+		<div class="panel panel-default">
+				<div class="panel-heading">Nouveau participant</div>
+				<div class="panel-body">
+		
+			<form th:action="@{/admin/save}" method="post">
+				<div class="form-group">
+					<label class="control-label">ID</label><label th:text="${participants.id}"></label> 
+					<input class="form-control" type="hidden" name="id" th:value="${participants.id}"> 
+				
+				</div>
+			
+				<div class="form-group">
+					<label class="control-label">Nom</label> 
+					<input class="form-control" type="text" name="nom" th:value="${participants.nom}"> 
+					<span th:errors="${participants.nom}" class="text-danger"></span>
+				</div>
+		
+				<div class="form-group">
+					<label class="control-label">Prenom</label> 
+					<input class="form-control" type="text" name="prenom" th:value="${participants.prenom}"> 
+					<span th:errors="${participants.prenom}" class="text-danger"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label">Entreprise</label> 
+					<input class="form-control" type="text" name="entreprise" th:value="${participants.entreprise}"> 
+					<span th:errors="${participants.entreprise}" class="text-danger"></span>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label">Email</label> 
+					<input class="form-control" type="email" name="mail" th:value="${participants.mail}"> 
+					<span th:errors="${participants.mail}" class="text-danger"></span>
+				</div>
+
+			<div class="form-group">
+					<label class="control-label">Tel</label> 
+					<input class="form-control" type="text" name="tel" th:value="${participants.tel}"> 
+					<span th:errors="${participants.tel}" class="text-danger"></span>
+				</div>
+			<div class="form-group">
+					<label class="control-label">Fonction</label> 
+					<input class="form-control" type="text" name="fonction" th:value="${participants.fonction}">
+					<span th:errors="${participants.fonction}" class="text-danger"></span> 
+				</div>
+			<div class="form-group">
+					<label class="control-label">Presentation</label> 
+					<input class="form-control" type="text" name="presentation" th:value="${participants.presentation}"> 
+					<span th:errors="${participants.presentation}" class="text-danger"></span>
+				</div>
+				<button type="submit" class="btn btn-primary">Enregistrer</button>
+		</form>
+     </div>
+    </div>
+	</div>
+	</div>
+</body>
+</html>
