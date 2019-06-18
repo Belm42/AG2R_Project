@@ -1,5 +1,4 @@
-/* TODO by Djer : evitez les caracètres accentuées dans les nom des ressoruce "java" (package, class, interfaces,...). C'est bien gèré par Java mais ca donne de l'urticiare aux anglophonnes*/
-package com.example.demo.entités;
+package fr.ag2r.bqm.projetA.entites;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,40 +19,40 @@ import org.springframework.lang.NonNull;
 public class Evenement implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEvenement;
-    
+
     @NonNull
     @Size(min = 1)
     private String nomEvenement;
-    
+
     @NonNull
     @Size(min = 1)
     private Date dateEvenement;
-    
+
     @NonNull
     @Size(min = 1)
     private Integer nombreParticipant;
-    
+
     @NonNull
     @Size(min = 1)
     private Integer nombreParticipantTable;
-    
+
     @NonNull
     @Size(min = 1)
     private Integer nombreTable;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
-    private List<Participants> participants;
+    private List<Participant> participants;
 
     public Evenement() {
         super();
     }
 
     public Evenement(String nomEvenement, Date dateEvenement, Integer nombreParticipant, Integer nombreParticipantTable,
-            Integer nombreTable, List<Participants> participants) {
+            Integer nombreTable, List<Participant> participants) {
         super();
         this.nomEvenement = nomEvenement;
         this.dateEvenement = dateEvenement;

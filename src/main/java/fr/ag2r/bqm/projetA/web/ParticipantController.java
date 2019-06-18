@@ -1,4 +1,4 @@
-package com.example.demo.web;
+package fr.ag2r.bqm.projetA.web;
 
 import javax.validation.Valid;
 
@@ -13,30 +13,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.dao.ParticipantsRepository;
-import com.example.demo.entités.Participants;
+import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
+import fr.ag2r.bqm.projetA.entites.Participant;
 
 @Controller
-public class ParticipantsController {
+public class ParticipantController {
 
     @Autowired
-    private ParticipantsRepository participantsRepository;
+    private ParticipantRepository participantRepository;
 
     //Dans le controller on doit creer des methodes
 
-    //TODO by Djer : ce code est dasn un controller "Participants" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
+    //TODO by Djer : ce code est dasn un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
     @RequestMapping("/user/index") //"/user/index"
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "motCle", defaultValue = "") String mc) {
+            @RequestParam(name = "motCle", defaultValue = "") String motCle) {
         // recupérer la liste des participants
-        Page<Participants> pageParticipant = participantsRepository.findByNomContainsIgnoreCase(mc,
+        Page<Participant> pageParticipant = participantRepository.findByNomContainsIgnoreCase(motCle,
                 PageRequest.of(page, 10));
         // On va stocker la liste dans le model
         model.addAttribute("listeParticipants", pageParticipant.getContent());
-        //TODO by Djer : "pages" va contenir un tableau VIDE de x "cases vides" (x = pageParticipant.getTotalPages())
         model.addAttribute("pages", new int[pageParticipant.getTotalPages()]);
         model.addAttribute("currentPage", page);
-        model.addAttribute("motCle", mc);
+        model.addAttribute("motCle", motCle);
         // on revient sur la vue pour les afficher
         return "participants";
     }
@@ -46,36 +45,36 @@ public class ParticipantsController {
             @RequestParam("entreprise") String entreprise, @RequestParam("mail") String mail,
             @RequestParam("tel") int tel, @RequestParam("fonction") String fonction,
             @RequestParam("presentation") String presentation) {
-        Participants participants = new Participants(nom, prenom, entreprise, mail, tel, fonction, presentation);
-        participantsRepository.save(participants);
+        Participant participants = new Participant(nom, prenom, entreprise, mail, tel, fonction, presentation);
+        participantRepository.save(participants);
         return "participants";
     }*/
 
     @GetMapping("/admin/delete")
     public String delete(int id, int page, String motCle) {
-        participantsRepository.deleteById(id);
+        participantRepository.deleteById(id);
         return "redirect:/user/index?page =" + page + "&motCle=" + motCle;
     }
 
     @GetMapping("/admin/formParticipant")
     public String form(Model model) {
-        model.addAttribute("participants", new Participants());
+        model.addAttribute("participants", new Participant());
         return "formParticipant";
     }
 
     @GetMapping("/admin/edit")
     public String edit(Model model, int id) {
-        Participants participants = participantsRepository.findById(id).get();
+        Participant participants = participantRepository.findById(id).get();
         model.addAttribute("participants", participants);
         return "editParticipant";
     }
 
     @PostMapping("/admin/save")
-    public String save(Model model, @Valid Participants participants, BindingResult bindingResult) {
+    public String save(Model model, @Valid Participant participants, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "formParticipant";
 
-        participantsRepository.save(participants);
+        participantRepository.save(participants);
         return "redirect:/user/index";
     }
 
