@@ -9,7 +9,11 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	<!-- TODO by Djer : par convetion vos pcqkaeg devrait avoir un nom "simillaire" 
+		à l'identifiant du projet : fr.ag2r.bqm -->
 	<groupId>fr.ag2r</groupId>
+	<!-- TODO by Djer : "projetA" serait mieux. Evitez les _ (undersocre) dans 
+		les noms de groupId, artefactId, package -->
 	<artifactId>Projet_A</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Projet_A</name>
@@ -52,6 +56,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -69,5 +80,3 @@
 	</build>
 
 </project>
-
-

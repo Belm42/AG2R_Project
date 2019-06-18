@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         BCryptPasswordEncoder bcpe = getBCPE();
+        //TODO by Djer : pas de SysOut sur un server (Logs ??)
         System.out.println(bcpe.encode("1234"));
 
         /*auth.inMemoryAuthentication().withUser("admin").password(bcpe.encode("1234")).roles("ADMIN", "USER");
@@ -42,6 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/login");// j'ai besoin d'utiliser un formulaire d'authentifiquation
+        /** Allow H2-console access */
+        http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+        http.csrf().disable(); //BAD
+        http.headers().frameOptions().disable(); //BAD
+        
+        
         http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/user/*").hasRole("USER");
         http.exceptionHandling().accessDeniedPage("/403");

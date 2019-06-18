@@ -15,10 +15,9 @@ import org.springframework.lang.NonNull;
 @Entity
 public class Participants implements Serializable {
 
-    /**
-     * 
-     */
+    /** serialVersionUID  */
     private static final long serialVersionUID = 2789864048707708L;
+    
     // Déclaration des variables 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,25 +26,32 @@ public class Participants implements Serializable {
     @NonNull
     @Size(min = 2, max = 20)
     private String nom;
+    
     @NonNull
     @Size(min = 2, max = 20)
     private String prenom;
     @NonNull
     @Size(min = 2, max = 20)
+    
     private String entreprise;
     @NonNull
     @Size(min = 5, max = 20)
     private String mail;
+    
     @NonNull
     @Size(min = 10, max = 11)
     private String tel;
+    
     @NonNull
     @Size(min = 2, max = 20)
     private String fonction;
+    
     @NonNull
     @Size(min = 5, max = 250)
     private String presentation;
+    
     // Un participant peut assister à plusieurs evenements.
+    //TODO by Djer le commentaire si dessus est FAUX. Cette association ce lit "Many (Particpant) To One (Evennement)". Si vous voulez qu'un particpants puisse participer à plusieurs Evennlment il faut une Liste d'Event ici aussi (une relation "ManytoMany")
     @ManyToOne(fetch = FetchType.LAZY)
     private Evenement evenement;
 
@@ -65,6 +71,7 @@ public class Participants implements Serializable {
         this.fonction = fonction;
         this.presentation = presentation;
         this.evenement = evenement;
+        //TODO by Djer : comme vous avez un  lien bi-directionnel JPA entre Evennement et Participant il faut penser à faire lien (si CE participants n'est pas dans la liste des participants de l'Evennement, l'ajouter, sinon .... ??) : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
     }
 
     /**

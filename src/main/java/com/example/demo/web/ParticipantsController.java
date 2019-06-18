@@ -24,6 +24,7 @@ public class ParticipantsController {
 
     //Dans le controller on doit creer des methodes
 
+    //TODO by Djer : ce code est dasn un controller "Participants" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
     @RequestMapping("/user/index") //"/user/index"
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "motCle", defaultValue = "") String mc) {
@@ -32,6 +33,7 @@ public class ParticipantsController {
                 PageRequest.of(page, 10));
         // On va stocker la liste dans le model
         model.addAttribute("listeParticipants", pageParticipant.getContent());
+        //TODO by Djer : "pages" va contenir un tableau VIDE de x "cases vides" (x = pageParticipant.getTotalPages())
         model.addAttribute("pages", new int[pageParticipant.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("motCle", mc);
