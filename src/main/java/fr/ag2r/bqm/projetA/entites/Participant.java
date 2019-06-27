@@ -39,7 +39,7 @@ public class Participant implements Serializable {
     private String mail;
 
     @NonNull
-    @Size(min = 10, max = 11)
+    @Size(min = 10)
     private String tel;
 
     @NonNull

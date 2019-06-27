@@ -89,7 +89,7 @@
 										<span class="input-group-addon "><img
 											src="https://img.icons8.com/color/48/000000/employee-card.png"
 											width="23px"></span> <input class="form-control" type="text"
-											name="nom" pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+											name="nom" 	pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
 											th:value="${participants.nom}"> <span
 											th:errors="${participants.nom}" class="text-danger"> </span>
 									</div>
@@ -100,7 +100,7 @@
 											<span class="input-group-addon "><img
 												src="https://img.icons8.com/color/48/000000/contact-card.png"
 												width="23px"></span> <input class="form-control" type="text"
-												name="prenom" pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+												name="prenom" 	pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
 												th:value="${participants.prenom}"> <span
 												th:errors="${participants.prenom}" class="text-danger">
 											</span>
@@ -113,7 +113,7 @@
 												src="https://img.icons8.com/color/48/000000/home.png"
 												width="23px"></span> <input class="form-control" type="text"
 												name="entreprise"
-												pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+											pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
 												th:value="${participants.entreprise}"> <span
 												th:errors="${participants.entreprise}" class="text-danger"></span>
 										</div>
@@ -148,7 +148,9 @@
 											<span class="input-group-addon"><img
 												src="https://img.icons8.com/color/48/000000/under-computer.png"
 												width="23px"></span> <input class="form-control" type="text"
-												name="fonction" th:value="${participants.fonction}">
+												name="fonction" 
+													pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
+												th:value="${participants.fonction}">
 											<span th:errors="${participants.fonction}"
 												class="text-danger"></span>
 										</div>
@@ -161,7 +163,7 @@
 												src="https://img.icons8.com/color/48/000000/contract-job.png"
 												width="23px"></span> <input class="form-control" type="text"
 												name="presentation"
-												pattern="[A-Za-z](([_\. \-]?[a-zA-Z0-9]+)*)"
+												pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
 												th:value="${participants.presentation}"> <span
 												th:errors="${participants.presentation}" class="text-danger"></span>
 										</div>
