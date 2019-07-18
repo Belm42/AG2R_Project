@@ -1,7 +1,6 @@
 package fr.ag2r.bqm.projetA.entites;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.lang.NonNull;
 
 @Entity
 public class Evenement implements Serializable {
@@ -22,26 +21,26 @@ public class Evenement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEvenement;
+    private int idEvenement;
 
-    @NonNull
-    @Size(min = 1)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String nomEvenement;
 
-    @NonNull
-    @Size(min = 1)
-    private Date dateEvenement;
+    @NotNull
+    @Size(min = 2, max = 50)
+    private String dateEvenement;
 
-    @NonNull
-    @Size(min = 1)
+    @NotNull
+    @Max(9999)
     private Integer nombreParticipant;
 
-    @NonNull
-    @Size(min = 1)
+    @NotNull
+    @Max(9999)
     private Integer nombreParticipantTable;
 
-    @NonNull
-    @Size(min = 1)
+    @NotNull
+    @Max(9999)
     private Integer nombreTable;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
@@ -51,8 +50,8 @@ public class Evenement implements Serializable {
         super();
     }
 
-    public Evenement(String nomEvenement, Date dateEvenement, Integer nombreParticipant, Integer nombreParticipantTable,
-            Integer nombreTable, List<Participant> participants) {
+    public Evenement(String nomEvenement, String dateEvenement, Integer nombreParticipant,
+            Integer nombreParticipantTable, Integer nombreTable, List<Participant> participants) {
         super();
         this.nomEvenement = nomEvenement;
         this.dateEvenement = dateEvenement;
@@ -61,6 +60,9 @@ public class Evenement implements Serializable {
         this.nombreTable = nombreTable;
         //TODO by Djer : comme vous avez un  lien bi-directionnel  JPA entre Evennement et Participant il faut penser à faire lien. EN général on éviter de laisser passer une liste potentiellement "mal compélté" et on créer une mathode "addParticipants" qui ajoute dans la list de l'évènnment et s'assure que l'Evennement de ce particpants est bien positionné (et "remooveParticipant") : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
         this.participants = participants;
+    }
+
+    public void addParticipant(Participant participant) {
     }
 
     /**
@@ -92,16 +94,17 @@ public class Evenement implements Serializable {
     }
 
     /**
+     * @return 
      * @return the dateEvenement
      */
-    public Date getDateEvenement() {
+    public String getDateEvenement() {
         return dateEvenement;
     }
 
     /**
      * @param dateEvenement the dateEvenement to set
      */
-    public void setDateEvenement(Date dateEvenement) {
+    public void setDateEvenement(String dateEvenement) {
         this.dateEvenement = dateEvenement;
     }
 

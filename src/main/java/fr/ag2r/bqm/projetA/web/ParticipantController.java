@@ -25,7 +25,7 @@ public class ParticipantController {
     //Dans le controller on doit creer des methodes
 
     //TODO by Djer : ce code est dasn un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
-    @RequestMapping("/user/index") //"/user/index"
+    @RequestMapping("/user/participant/index") //"/user/index"
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
         // recupérer la liste des participants
@@ -40,48 +40,38 @@ public class ParticipantController {
         return "participants";
     }
 
-    /*@RequestMapping("/addParticipant")
-    public String AddParticipant(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom,
-            @RequestParam("entreprise") String entreprise, @RequestParam("mail") String mail,
-            @RequestParam("tel") int tel, @RequestParam("fonction") String fonction,
-            @RequestParam("presentation") String presentation) {
-        Participant participants = new Participant(nom, prenom, entreprise, mail, tel, fonction, presentation);
-        participantRepository.save(participants);
-        return "participants";
-    }*/
-
-    @GetMapping("/admin/delete")
+    @GetMapping("/admin/participant/delete")
     public String delete(int id, int page, String motCle) {
         participantRepository.deleteById(id);
-        return "redirect:/user/index?page =" + page + "&motCle=" + motCle;
+        return "redirect:/user/participant/index?page =" + page + "&motCle=" + motCle;
     }
 
-    @GetMapping("/admin/formParticipant")
+    @GetMapping("/admin/participant/formParticipant")
     public String form(Model model) {
         model.addAttribute("participants", new Participant());
         return "formParticipant";
     }
 
-    @GetMapping("/admin/edit")
+    @GetMapping("/admin/participant/edit")
     public String edit(Model model, int id) {
         Participant participants = participantRepository.findById(id).get();
         model.addAttribute("participants", participants);
         return "editParticipant";
     }
 
-    @PostMapping("/admin/save")
+    @PostMapping("/admin/participant/save")
     public String save(Model model, @Valid Participant participants, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "formParticipant";
 
         participantRepository.save(participants);
-        return "redirect:/user/index";
+        return "redirect:/user/participant/index";
     }
 
     @GetMapping("/")
     public String def() {
 
-        return "redirect:/user/index";
+        return "redirect:/user/event/index";
     }
 
     @GetMapping("/403")

@@ -4,7 +4,7 @@
 	layout:decorate="layout">
 <head>
 <meta charset="utf-8">
-<title>Saisie d'un participant</title>
+<title>Saisie d'un evenement</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -13,6 +13,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 	<div layout:fragment="content">
 
 		<div class="container">
@@ -75,13 +76,13 @@
 				<div class="col-md-4">
 					<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #A2D9CE">
-							Nouveau participant<img
+							Nouvel evenement<img
 								src="https://img.icons8.com/color/48/000000/add-user-male.png"
 								width="25px">
 						</div>
 						<div class="panel-body">
 
-							<form th:action="@{/admin/participant/save}" method="post">
+							<form th:action="@{/admin/event/save}" method="post">
 								<div class="form-group">
 
 									<label class="control-label">Nom</label>
@@ -89,86 +90,67 @@
 										<span class="input-group-addon "><img
 											src="https://img.icons8.com/color/48/000000/employee-card.png"
 											width="23px"></span> <input class="form-control" type="text"
-											name="nom" pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.nom}"> <span
-											th:errors="${participants.nom}" class="text-danger"> </span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Prenom</label>
-									<div class="input-group">
-										<span class="input-group-addon "><img
-											src="https://img.icons8.com/color/48/000000/contact-card.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="prenom" pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.prenom}"> <span
-											th:errors="${participants.prenom}" class="text-danger">
+											name="nomEvenement"
+											pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
+											th:value="${evenement.nomEvenement}"> <span
+											th:errors="${evenement.nomEvenement}" class="text-danger">
 										</span>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Entreprise</label>
-									<div class="input-group">
-										<span class="input-group-addon "><img
-											src="https://img.icons8.com/color/48/000000/home.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="entreprise"
-											pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.entreprise}"> <span
-											th:errors="${participants.entreprise}" class="text-danger"></span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Email</label>
-									<div class="input-group">
-										<span class="input-group-addon"><img
-											src="https://img.icons8.com/color/48/000000/message-group.png"
-											width="23px"></span> <input class="form-control" type="email"
-											name="mail"
-											pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})"
-											th:value="${participants.mail}"> <span
-											th:errors="${participants.mail}" class="text-danger"></span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Tel</label>
-									<div class="input-group">
-										<span class="input-group-addon "><img
-											src="https://img.icons8.com/color/48/000000/shake-phone.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="tel" pattern="[0][0-9]+" th:value="${participants.tel}">
-										<span th:errors="${participants.tel}" class="text-danger"></span>
-									</div>
-								</div>
 
-								<div class="form-group">
-									<label class="control-label">Fonction</label>
-									<div class="input-group">
-										<span class="input-group-addon"><img
-											src="https://img.icons8.com/color/48/000000/under-computer.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="fonction" pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.fonction}"> <span
-											th:errors="${participants.fonction}" class="text-danger"></span>
+									<div class="form-group">
+										<label class="control-label">Date</label>
+										<div class="input-group">
+											<span class="input-group-addon "><img
+												src="https://img.icons8.com/color/48/000000/contact-card.png"
+												width="23px"></span> <input class="form-control" type="text"
+												name="dateEvenement"
+												pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
+												th:value="${evenement.dateEvenement}"> <span
+												th:errors="${evenement.dateEvenement}" class="text-danger">
+											</span>
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Presentation</label>
-									<div class="input-group">
-										<!-- TODO by Djer : je pense que les caractères accentués sont du coup interdits, est-ce volontaire ? Vérifierz à l'aide de http://regexp101.org -->
-										<span class="input-group-addon"><img
-											src="https://img.icons8.com/color/48/000000/contract-job.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="presentation"
-											pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.presentation}"> <span
-											th:errors="${participants.presentation}" class="text-danger"></span>
+									<div class="form-group">
+										<label class="control-label">Nombre participant</label>
+										<div class="input-group">
+											<span class="input-group-addon "><img
+												src="https://img.icons8.com/color/48/000000/home.png"
+												width="23px"></span> <input class="form-control" type="text"
+												name="nombreParticipant" 
+												th:value="${evenement.nombreParticipant}"> <span
+												th:errors="${evenement.nombreParticipant}"
+												class="text-danger"></span>
+										</div>
 									</div>
-								</div>
-								<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
+									<div class="form-group">
+										<label class="control-label">Nombre participant par
+											table</label>
+										<div class="input-group">
+											<span class="input-group-addon"><img
+												src="https://img.icons8.com/color/48/000000/message-group.png"
+												width="23px"></span> <input class="form-control" type="text"
+												name="nombreParticipantTable" 
+												th:value="${evenement.nombreParticipantTable}"> <span
+												th:errors="${evenement.nombreParticipantTable}"
+												class="text-danger"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label">Nombre table</label>
+										<div class="input-group">
+											<span class="input-group-addon "><img
+												src="https://img.icons8.com/color/48/000000/shake-phone.png"
+												width="23px"></span> <input class="form-control" type="text"
+												name="nombreTable" 
+												th:value="${evenement.nombreTable}"> <span
+												th:errors="${evenement.nombreTable}" class="text-danger"></span>
+										</div>
+									</div>
 
-								<!-- TODO by Djer : Ajouter serait mieux -->
-								<button type="submit" class="btn btn-primary">Enregistrer</button>
+									<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
+
+									<!-- TODO by Djer : Ajouter serait mieux -->
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
 							</form>
 						</div>
 					</div>
@@ -306,8 +288,6 @@
 		<!-- Section: Blog v.2 -->
 
 	</div>
-
-
 
 </body>
 </html>

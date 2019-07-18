@@ -7,10 +7,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.lang.NonNull;
 
 @Entity
 public class Participant implements Serializable {
@@ -23,35 +23,36 @@ public class Participant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NonNull
-    @Size(min = 2, max = 20)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String nom;
 
-    @NonNull
-    @Size(min = 2, max = 20)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String prenom;
-    @NonNull
-    @Size(min = 2, max = 20)
+    @NotNull
+    @Size(min = 2, max = 50)
 
     private String entreprise;
-    @NonNull
-    @Size(min = 5, max = 20)
+    @NotNull
+    @Size(min = 5, max = 50)
     private String mail;
 
-    @NonNull
+    @NotNull
     @Size(min = 10)
     private String tel;
 
-    @NonNull
-    @Size(min = 2, max = 20)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String fonction;
 
-    @NonNull
+    @NotNull
     @Size(min = 5, max = 250)
     private String presentation;
 
     // Plusieurs participants peuvent assister à un evenements.
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEvenement")
     private Evenement evenement;
 
     // Générer un constructeurs par défaut (Sans parametres) pour JPA.
