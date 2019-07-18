@@ -39,16 +39,12 @@ public class Participant implements Serializable {
     private String mail;
 
     @NotNull
-    @Size(min = 10)
-    private String tel;
-
-    @NotNull
-    @Size(min = 2, max = 50)
+    @Size(min = 1, max = 50)
     private String fonction;
 
     @NotNull
-    @Size(min = 5, max = 250)
-    private String presentation;
+    @Size(min = 1, max = 250)
+    private String secteur;
 
     // Plusieurs participants peuvent assister à un evenements.
     @ManyToOne(fetch = FetchType.LAZY)
@@ -60,16 +56,15 @@ public class Participant implements Serializable {
         super();
     }
 
-    public Participant(String nom, String prenom, String entreprise, String mail, String tel, String fonction,
-            String presentation, Evenement evenement) {
+    public Participant(String nom, String prenom, String entreprise, String mail, String fonction, String secteur,
+            Evenement evenement) {
         super();
         this.nom = nom;
         this.prenom = prenom;
         this.entreprise = entreprise;
         this.mail = mail;
-        this.tel = tel;
         this.fonction = fonction;
-        this.presentation = presentation;
+        this.secteur = secteur;
         this.evenement = evenement;
         //TODO by Djer : comme vous avez un  lien bi-directionnel JPA entre Evennement et Participant il faut penser à faire lien (si CE participants n'est pas dans la liste des participants de l'Evennement, l'ajouter, sinon .... ??) : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
     }
@@ -145,20 +140,6 @@ public class Participant implements Serializable {
     }
 
     /**
-     * @return the tel
-     */
-    public String getTel() {
-        return tel;
-    }
-
-    /**
-     * @param tel the tel to set
-     */
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    /**
      * @return the fonction
      */
     public String getFonction() {
@@ -175,15 +156,15 @@ public class Participant implements Serializable {
     /**
      * @return the presentation
      */
-    public String getPresentation() {
-        return presentation;
+    public String getSecteur() {
+        return secteur;
     }
 
     /**
      * @param presentation the presentation to set
      */
-    public void setPresentation(String présentation) {
-        this.presentation = présentation;
+    public void setSecteur(String secteur) {
+        this.secteur = secteur;
     }
 
 }

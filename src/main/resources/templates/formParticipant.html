@@ -130,45 +130,43 @@
 											th:errors="${participants.mail}" class="text-danger"></span>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="control-label">Tel</label>
-									<div class="input-group">
-										<span class="input-group-addon "><img
-											src="https://img.icons8.com/color/48/000000/shake-phone.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="tel" pattern="[0][0-9]+" th:value="${participants.tel}">
-										<span th:errors="${participants.tel}" class="text-danger"></span>
-									</div>
-								</div>
 
 								<div class="form-group">
 									<label class="control-label">Fonction</label>
 									<div class="input-group">
 										<span class="input-group-addon"><img
 											src="https://img.icons8.com/color/48/000000/under-computer.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="fonction" pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.fonction}"> <span
-											th:errors="${participants.fonction}" class="text-danger"></span>
+											width="23px"></span> <select name="fonction"
+											class="form-control" th:value="${participants.fonction}">
+											<option  value="PDG">PDG</option>
+											<option  value="Commercial">Commercial</option>
+											<option  value="RH">RH</option>
+											<option  value="Cadre">Cadre</option>
+											<option  value="Autres">Autres</option>
+										</select> <span th:errors="${participants.fonction}"
+											class="text-danger"></span>
 									</div>
+
 								</div>
 								<div class="form-group">
-									<label class="control-label">Presentation</label>
+									<label class="control-label">Secteur</label>
 									<div class="input-group">
 										<!-- TODO by Djer : je pense que les caractères accentués sont du coup interdits, est-ce volontaire ? Vérifierz à l'aide de http://regexp101.org -->
 										<span class="input-group-addon"><img
 											src="https://img.icons8.com/color/48/000000/contract-job.png"
-											width="23px"></span> <input class="form-control" type="text"
-											name="presentation"
-											pattern="a-zA-Z](?:[ '.\-a-zA-Z]*[a-zA-Z])?$"
-											th:value="${participants.presentation}"> <span
-											th:errors="${participants.presentation}" class="text-danger"></span>
+											width="23px"></span> <select name="secteur"
+											class="form-control" th:value="${participants.secteur}">
+											<option value="Primaire">Primaire</option>
+											<option value="Secondaire">Secondaire</option>
+											<option value="Tertiaire">Tertiaire</option>
+										</select> <span th:errors="${participants.secteur}" class="text-danger"></span>
 									</div>
-								</div>
-								<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
+									</div>
+									
+									<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
 
-								<!-- TODO by Djer : Ajouter serait mieux -->
-								<button type="submit" class="btn btn-primary">Enregistrer</button>
+									<!-- TODO by Djer : Ajouter serait mieux -->
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
 							</form>
 						</div>
 					</div>

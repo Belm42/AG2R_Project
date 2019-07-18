@@ -28,18 +28,16 @@
 							<th>Prenom</th>
 							<th>Entreprise</th>
 							<th>Mail</th>
-							<th>Tel</th>
 							<th>Fonction</th>
-							<th>Presentation</th>
+							<th>Secteur</th>
 						</tr>
 						<tr th:each="p:${listeParticipants}">
 							<td th:text="${p.nom}"></td>
 							<td th:text="${p.prenom}"></td>
 							<td th:text="${p.entreprise}"></td>
 							<td th:text="${p.mail}"></td>
-							<td th:text="${p.tel}"></td>
 							<td th:text="${p.fonction}"></td>
-							<td th:text="${p.presentation}"></td>
+							<td th:text="${p.secteur}"></td>
 
 							<td><a 
 								onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')"
