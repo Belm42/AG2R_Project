@@ -43,7 +43,6 @@ public class Evenement implements Serializable {
     @Max(9999)
     private Integer nombreTable;
 
-    @NotNull
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
     private List<Participant> participants;
 
@@ -63,15 +62,15 @@ public class Evenement implements Serializable {
         this.participants = participant;
     }
 
-    /*    public void addParticipant(Participant participant) {
+    public void addParticipant(Participant participant) {
         participants.add(participant);
         participant.setEvenement(this);
     }
-    
+
     public void removePaticipant(Participant participant) {
         participants.remove(participant);
         participant.setEvenement(null);
-    }   **/
+    }
 
     /**
      * @return the idEvenement
@@ -171,5 +170,4 @@ public class Evenement implements Serializable {
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
     }
-
 }

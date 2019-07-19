@@ -47,7 +47,7 @@ public class Participant implements Serializable {
     private String secteur;
 
     // Plusieurs participants peuvent assister à un evenements.
-    @NotNull
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvenement")
     private Evenement evenement;

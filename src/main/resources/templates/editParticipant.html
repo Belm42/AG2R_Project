@@ -18,45 +18,45 @@
 					<form th:action="@{/admin/participant/save}" method="post">
 						<div class="form-group">
 							<label class="control-label">ID</label><label
-								th:text="${participants.id}"></label> <input
+								th:text="${participantEdit.id}"></label> <input
 								class="form-control" type="hidden" name="id"
-								th:value="${participants.id}">
+								th:value="${participantEdit.id}">
 						</div>
 						<div class="form-group">
 							<label class="control-label">Nom</label> <input
 								class="form-control" type="text" name="nom"
-								th:value="${participants.nom}"> <span
-								th:errors="${participants.nom}" class="text-danger"></span>
+								th:value="${participantEdit.nom}"> <span
+								th:errors="${participantEdit.nom}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Prenom</label> <input
 								class="form-control" type="text" name="prenom"
-								th:value="${participants.prenom}"> <span
-								th:errors="${participants.prenom}" class="text-danger"></span>
+								th:value="${participantEdit.prenom}"> <span
+								th:errors="${participantEdit.prenom}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Entreprise</label> <input
 								class="form-control" type="text" name="entreprise"
-								th:value="${participants.entreprise}"> <span
-								th:errors="${participants.entreprise}" class="text-danger"></span>
+								th:value="${participantEdit.entreprise}"> <span
+								th:errors="${participantEdit.entreprise}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Email</label> <input
 								class="form-control" type="email" name="mail"
-								th:value="${participants.mail}"> <span
-								th:errors="${participants.mail}" class="text-danger"></span>
+								th:value="${participantEdit.mail}"> <span
+								th:errors="${participantEdit.mail}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Fonction</label> <input
 								class="form-control" type="text" name="fonction"
-								th:value="${participants.fonction}"> <span
-								th:errors="${participants.fonction}" class="text-danger"></span>
+								th:value="${participantEdit.fonction}"> <span
+								th:errors="${participantEdit.fonction}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Secteur</label> <input
 								class="form-control" type="text" name="secteur"
-								th:value="${participants.secteur}"> <span
-								th:errors="${participants.secteur}" class="text-danger"></span>
+								th:value="${participantEdit.secteur}"> <span
+								th:errors="${participantEdit.secteur}" class="text-danger"></span>
 						</div>
 		
 

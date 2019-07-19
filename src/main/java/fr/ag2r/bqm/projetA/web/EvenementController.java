@@ -50,23 +50,23 @@ public class EvenementController {
 
     @GetMapping("/admin/event/edit")
     public String edit(Model model, Integer id) {
-        Evenement evenement = eventRepository.findById(id).get();
-        model.addAttribute("evenement", evenement);
+        Evenement evenementEdit = eventRepository.findById(id).get();
+        model.addAttribute("evenementEdit", evenementEdit);
         return "editEvenement";
     }
 
     @GetMapping("/admin/event/manage")
     public String manage(Model model, Integer id) {
-        Evenement evenement = eventRepository.findById(id).get();
-        model.addAttribute("evenement", evenement);
+        Evenement evenementManage = eventRepository.findById(id).get();
+        model.addAttribute("evenementManage", evenementManage);
         return "manageEvenement";
     }
 
     @PostMapping("/admin/event/save")
     public String save(Model model, @Valid Evenement evenement, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "formEvenement";
-        }
+
         eventRepository.save(evenement);
         return "redirect:/user/event/index";
     }

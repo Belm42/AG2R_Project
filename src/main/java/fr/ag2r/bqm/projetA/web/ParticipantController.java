@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
+import fr.ag2r.bqm.projetA.entites.Evenement;
 import fr.ag2r.bqm.projetA.entites.Participant;
 
 @Controller
@@ -54,8 +55,10 @@ public class ParticipantController {
 
     @GetMapping("/admin/participant/edit")
     public String edit(Model model, Integer id) {
-        Participant participants = participantRepository.findById(id).get();
-        model.addAttribute("participants", participants);
+        Participant participantEdit = participantRepository.findById(id).get();
+        Evenement event = new Evenement();
+        event.addParticipant(participantEdit);
+        model.addAttribute("participantEdit", participantEdit);
         return "editParticipant";
     }
 
