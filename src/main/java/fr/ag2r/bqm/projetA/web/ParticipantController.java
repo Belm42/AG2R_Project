@@ -26,14 +26,14 @@ public class ParticipantController {
 
     //TODO by Djer : ce code est dasn un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
     @RequestMapping("/user/participant/index") //"/user/index"
-    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
         // recupérer la liste des participants
         Page<Participant> pageParticipant = participantRepository.findByNomContainsIgnoreCase(motCle,
                 PageRequest.of(page, 10));
         // On va stocker la liste dans le model
         model.addAttribute("listeParticipants", pageParticipant.getContent());
-        model.addAttribute("pages", new int[pageParticipant.getTotalPages()]);
+        model.addAttribute("pages", new Integer[pageParticipant.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("motCle", motCle);
         // on revient sur la vue pour les afficher
@@ -41,7 +41,7 @@ public class ParticipantController {
     }
 
     @GetMapping("/admin/participant/delete")
-    public String delete(int id, int page, String motCle) {
+    public String delete(Integer id, Integer page, String motCle) {
         participantRepository.deleteById(id);
         return "redirect:/user/participant/index?page =" + page + "&motCle=" + motCle;
     }
@@ -53,7 +53,7 @@ public class ParticipantController {
     }
 
     @GetMapping("/admin/participant/edit")
-    public String edit(Model model, int id) {
+    public String edit(Model model, Integer id) {
         Participant participants = participantRepository.findById(id).get();
         model.addAttribute("participants", participants);
         return "editParticipant";

@@ -21,7 +21,7 @@ public class Participant implements Serializable {
     // Déclaration des variables 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Size(min = 2, max = 50)
@@ -43,10 +43,11 @@ public class Participant implements Serializable {
     private String fonction;
 
     @NotNull
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 50)
     private String secteur;
 
     // Plusieurs participants peuvent assister à un evenements.
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvenement")
     private Evenement evenement;
@@ -72,14 +73,14 @@ public class Participant implements Serializable {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -165,6 +166,20 @@ public class Participant implements Serializable {
      */
     public void setSecteur(String secteur) {
         this.secteur = secteur;
+    }
+
+    /**
+     * @return the evenement
+     */
+    public Evenement getEvenement() {
+        return evenement;
+    }
+
+    /**
+     * @param evenement the evenement to set
+     */
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
     }
 
 }

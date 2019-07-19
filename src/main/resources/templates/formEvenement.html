@@ -116,7 +116,7 @@
 											<span class="input-group-addon "><img
 												src="https://img.icons8.com/color/48/000000/home.png"
 												width="23px"></span> <input class="form-control" type="text"
-												name="nombreParticipant" 
+												name="nombreParticipant"
 												th:value="${evenement.nombreParticipant}"> <span
 												th:errors="${evenement.nombreParticipant}"
 												class="text-danger"></span>
@@ -129,7 +129,7 @@
 											<span class="input-group-addon"><img
 												src="https://img.icons8.com/color/48/000000/message-group.png"
 												width="23px"></span> <input class="form-control" type="text"
-												name="nombreParticipantTable" 
+												name="nombreParticipantTable"
 												th:value="${evenement.nombreParticipantTable}"> <span
 												th:errors="${evenement.nombreParticipantTable}"
 												class="text-danger"></span>
@@ -141,16 +141,16 @@
 											<span class="input-group-addon "><img
 												src="https://img.icons8.com/color/48/000000/shake-phone.png"
 												width="23px"></span> <input class="form-control" type="text"
-												name="nombreTable" 
-												th:value="${evenement.nombreTable}"> <span
-												th:errors="${evenement.nombreTable}" class="text-danger"></span>
+												name="nombreTable" th:value="${evenement.nombreTable}">
+											<span th:errors="${evenement.nombreTable}"
+												class="text-danger"></span>
 										</div>
 									</div>
+								</div>
+								<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
 
-									<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
-
-									<!-- TODO by Djer : Ajouter serait mieux -->
-									<button type="submit" class="btn btn-primary">Enregistrer</button>
+								<!-- TODO by Djer : Ajouter serait mieux -->
+								<button type="submit" class="btn btn-primary">Enregistrer</button>
 							</form>
 						</div>
 					</div>

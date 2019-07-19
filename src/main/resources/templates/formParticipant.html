@@ -138,11 +138,11 @@
 											src="https://img.icons8.com/color/48/000000/under-computer.png"
 											width="23px"></span> <select name="fonction"
 											class="form-control" th:value="${participants.fonction}">
-											<option  value="PDG">PDG</option>
-											<option  value="Commercial">Commercial</option>
-											<option  value="RH">RH</option>
-											<option  value="Cadre">Cadre</option>
-											<option  value="Autres">Autres</option>
+											<option value="PDG">PDG</option>
+											<option value="Commercial">Commercial</option>
+											<option value="RH">RH</option>
+											<option value="Cadre">Cadre</option>
+											<option value="Autres">Autres</option>
 										</select> <span th:errors="${participants.fonction}"
 											class="text-danger"></span>
 									</div>
@@ -161,12 +161,13 @@
 											<option value="Tertiaire">Tertiaire</option>
 										</select> <span th:errors="${participants.secteur}" class="text-danger"></span>
 									</div>
-									</div>
-									
-									<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
+								</div>
+				
 
-									<!-- TODO by Djer : Ajouter serait mieux -->
-									<button type="submit" class="btn btn-primary">Enregistrer</button>
+								<!-- TODO by Djer : vos participan,ts devraient être lié à (au mioins) UN Evennements. Soit lors de la création (ici) soit il manque une page "admin" pour ajouter des participants (déja créé) à un Evennement -->
+
+								<!-- TODO by Djer : Ajouter serait mieux -->
+								<button type="submit" class="btn btn-primary">Enregistrer</button>
 							</form>
 						</div>
 					</div>

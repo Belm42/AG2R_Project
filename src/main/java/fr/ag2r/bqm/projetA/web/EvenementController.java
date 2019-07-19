@@ -23,12 +23,12 @@ public class EvenementController {
     private EvenementRepository eventRepository;
 
     @RequestMapping("user/event/index")
-    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
         Page<Evenement> pageEvenement = eventRepository.findBynomEvenementContainsIgnoreCase(motCle,
                 PageRequest.of(page, 10));
         model.addAttribute("listeEvenements", pageEvenement.getContent());
-        model.addAttribute("pages", new int[pageEvenement.getTotalPages()]);
+        model.addAttribute("pages", new Integer[pageEvenement.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("motCle", motCle);
 
@@ -36,21 +36,8 @@ public class EvenementController {
 
     }
 
-    //    @RequestMapping("user/event/participant")
-    //    public String participantEvent(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-    //            @RequestParam(name = "motCle", defaultValue = "") String motCle) {
-    //        Page<Evenement> pageEvenement = eventRepository.findBynomEvenementContainsIgnoreCase(motCle,
-    //                PageRequest.of(page, 10));
-    //        model.addAttribute("listeEvenements", pageEvenement.getContent());
-    //        model.addAttribute("pages", new int[pageEvenement.getTotalPages()]);
-    //        model.addAttribute("currentPage", page);
-    //        model.addAttribute("motCle", motCle);
-    //
-    //        return "evenementParticipant";
-    //    }
-
     @GetMapping("/admin/event/delete")
-    public String delete(int id, int page, String motCle) {
+    public String delete(Integer id, Integer page, String motCle) {
         eventRepository.deleteById(id);
         return "redirect:/user/event/index?page =" + page + "&motCle=" + motCle;
     }
@@ -62,10 +49,17 @@ public class EvenementController {
     }
 
     @GetMapping("/admin/event/edit")
-    public String edit(Model model, int id) {
-        Evenement evenement1 = eventRepository.findById(id).get();
-        model.addAttribute("evenement", evenement1);
+    public String edit(Model model, Integer id) {
+        Evenement evenement = eventRepository.findById(id).get();
+        model.addAttribute("evenement", evenement);
         return "editEvenement";
+    }
+
+    @GetMapping("/admin/event/manage")
+    public String manage(Model model, Integer id) {
+        Evenement evenement = eventRepository.findById(id).get();
+        model.addAttribute("evenement", evenement);
+        return "manageEvenement";
     }
 
     @PostMapping("/admin/event/save")

@@ -21,7 +21,7 @@ public class Evenement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEvenement;
+    private Integer idEvenement;
 
     @NotNull
     @Size(min = 2, max = 50)
@@ -43,6 +43,7 @@ public class Evenement implements Serializable {
     @Max(9999)
     private Integer nombreTable;
 
+    @NotNull
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evenement", fetch = FetchType.LAZY)
     private List<Participant> participants;
 
@@ -51,7 +52,7 @@ public class Evenement implements Serializable {
     }
 
     public Evenement(String nomEvenement, String dateEvenement, Integer nombreParticipant,
-            Integer nombreParticipantTable, Integer nombreTable, List<Participant> participants) {
+            Integer nombreParticipantTable, Integer nombreTable, List<Participant> participant) {
         super();
         this.nomEvenement = nomEvenement;
         this.dateEvenement = dateEvenement;
@@ -59,11 +60,18 @@ public class Evenement implements Serializable {
         this.nombreParticipantTable = nombreParticipantTable;
         this.nombreTable = nombreTable;
         //TODO by Djer : comme vous avez un  lien bi-directionnel  JPA entre Evennement et Participant il faut penser à faire lien. EN général on éviter de laisser passer une liste potentiellement "mal compélté" et on créer une mathode "addParticipants" qui ajoute dans la list de l'évènnment et s'assure que l'Evennement de ce particpants est bien positionné (et "remooveParticipant") : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
-        this.participants = participants;
+        this.participants = participant;
     }
 
-    public void addParticipant(Participant participant) {
+    /*    public void addParticipant(Participant participant) {
+        participants.add(participant);
+        participant.setEvenement(this);
     }
+    
+    public void removePaticipant(Participant participant) {
+        participants.remove(participant);
+        participant.setEvenement(null);
+    }   **/
 
     /**
      * @return the idEvenement
@@ -148,6 +156,20 @@ public class Evenement implements Serializable {
      */
     public void setNombreTable(Integer nombreTable) {
         this.nombreTable = nombreTable;
+    }
+
+    /**
+     * @return the participants
+     */
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    /**
+     * @param participants the participants to set
+     */
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
 
 }

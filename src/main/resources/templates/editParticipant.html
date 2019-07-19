@@ -10,7 +10,7 @@
 	<div layout:fragment="content">
 		<div class="col-md-6">
 			<div class="panel panel-default">
-			<!-- TODO by Djer : "Modifier un participants" serait mieux -->
+				<!-- TODO by Djer : "Modifier un participants" serait mieux -->
 				<div class="panel-heading">Editer le participant</div>
 				<div class="panel-body">
 
@@ -22,40 +22,29 @@
 								class="form-control" type="hidden" name="id"
 								th:value="${participants.id}">
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Nom</label> <input
 								class="form-control" type="text" name="nom"
 								th:value="${participants.nom}"> <span
 								th:errors="${participants.nom}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Prenom</label> <input
 								class="form-control" type="text" name="prenom"
 								th:value="${participants.prenom}"> <span
 								th:errors="${participants.prenom}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Entreprise</label> <input
 								class="form-control" type="text" name="entreprise"
 								th:value="${participants.entreprise}"> <span
 								th:errors="${participants.entreprise}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Email</label> <input
 								class="form-control" type="email" name="mail"
 								th:value="${participants.mail}"> <span
 								th:errors="${participants.mail}" class="text-danger"></span>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label">Tel</label> <input
-								class="form-control" type="text" name="tel"
-								th:value="${participants.tel}"> <span
-								th:errors="${participants.tel}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Fonction</label> <input
@@ -64,16 +53,18 @@
 								th:errors="${participants.fonction}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Presentation</label> <input
-								class="form-control" type="text" name="presentation"
-								th:value="${participants.presentation}"> <span
-								th:errors="${participants.presentation}" class="text-danger"></span>
+							<label class="control-label">Secteur</label> <input
+								class="form-control" type="text" name="secteur"
+								th:value="${participants.secteur}"> <span
+								th:errors="${participants.secteur}" class="text-danger"></span>
 						</div>
+		
+
 						<button type="submit" class="btn btn-primary">Enregistrer</button>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
