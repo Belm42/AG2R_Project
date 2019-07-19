@@ -12,8 +12,10 @@
 		<!-- céation d'un tableau pour stocker les participants -->
 		<div class="container">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Liste des participants a
-					l'évenement <a th:text="${evenementManage.nomEvenement}"></a></div>
+				<div class="panel-heading">
+					Liste des participants a l'évenement <a
+						th:text="${evenementManage.nomEvenement}"></a>
+				</div>
 				<div class="panel-body"></div>
 				<div class="panel-body">
 					<table class="table">
@@ -28,7 +30,7 @@
 							<td th:text="${participant.prenom}"></td>
 							<td th:text="${participant.entreprise}"></td>
 							<td th:text="${participant.fonction}"></td>
-							
+
 
 
 						</tr>

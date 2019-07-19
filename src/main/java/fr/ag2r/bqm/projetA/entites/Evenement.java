@@ -29,6 +29,7 @@ public class Evenement implements Serializable {
 
     @NotNull
     @Size(min = 2, max = 50)
+    //TODO by Djer : Devrait être de type Date, Spring peut convertir des "chaine de texte" en Date cf "type Conversion" : https://www.baeldung.com/spring-date-parameters
     private String dateEvenement;
 
     @NotNull
@@ -59,6 +60,7 @@ public class Evenement implements Serializable {
         this.nombreParticipantTable = nombreParticipantTable;
         this.nombreTable = nombreTable;
         //TODO by Djer : comme vous avez un  lien bi-directionnel  JPA entre Evennement et Participant il faut penser à faire lien. EN général on éviter de laisser passer une liste potentiellement "mal compélté" et on créer une mathode "addParticipants" qui ajoute dans la list de l'évènnment et s'assure que l'Evennement de ce particpants est bien positionné (et "remooveParticipant") : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
+        // le methode "add" et "éremove" sont bonnes, enelve juste le paramètre "participant" de ce constructeur, et lorsque tu créé un Evennement, créé d'abord l'éevennement avec les paramètre au constructeur PUIS utilise la méthdoe "addParticipant"
         this.participants = participant;
     }
 
