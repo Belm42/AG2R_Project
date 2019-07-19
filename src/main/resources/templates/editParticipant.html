@@ -4,77 +4,67 @@
 	layout:decorate="layout">
 <head>
 <meta charset="utf-8">
-<title>Saisie d'un participant</title>
+<title>Editer un participant</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div class="col-md-6">
 			<div class="panel panel-default">
-			<!-- TODO by Djer : "Modifier un participants" serait mieux -->
-				<div class="panel-heading">Nouveau participant</div>
+				<!-- TODO by Djer : "Modifier un participants" serait mieux -->
+				<div class="panel-heading">Editer le participant</div>
 				<div class="panel-body">
 
 					<!-- TODO by Djer : reprendre les règles de validation de l'ajout d'un participants ?  -->
-					<form th:action="@{/admin/save}" method="post">
+					<form th:action="@{/admin/participant/save}" method="post">
 						<div class="form-group">
 							<label class="control-label">ID</label><label
-								th:text="${participants.id}"></label> <input
+								th:text="${participantEdit.id}"></label> <input
 								class="form-control" type="hidden" name="id"
-								th:value="${participants.id}">
-
+								th:value="${participantEdit.id}">
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Nom</label> <input
 								class="form-control" type="text" name="nom"
-								th:value="${participants.nom}"> <span
-								th:errors="${participants.nom}" class="text-danger"></span>
+								th:value="${participantEdit.nom}"> <span
+								th:errors="${participantEdit.nom}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Prenom</label> <input
 								class="form-control" type="text" name="prenom"
-								th:value="${participants.prenom}"> <span
-								th:errors="${participants.prenom}" class="text-danger"></span>
+								th:value="${participantEdit.prenom}"> <span
+								th:errors="${participantEdit.prenom}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Entreprise</label> <input
 								class="form-control" type="text" name="entreprise"
-								th:value="${participants.entreprise}"> <span
-								th:errors="${participants.entreprise}" class="text-danger"></span>
+								th:value="${participantEdit.entreprise}"> <span
+								th:errors="${participantEdit.entreprise}" class="text-danger"></span>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">Email</label> <input
 								class="form-control" type="email" name="mail"
-								th:value="${participants.mail}"> <span
-								th:errors="${participants.mail}" class="text-danger"></span>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label">Tel</label> <input
-								class="form-control" type="text" name="tel"
-								th:value="${participants.tel}"> <span
-								th:errors="${participants.tel}" class="text-danger"></span>
+								th:value="${participantEdit.mail}"> <span
+								th:errors="${participantEdit.mail}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Fonction</label> <input
 								class="form-control" type="text" name="fonction"
-								th:value="${participants.fonction}"> <span
-								th:errors="${participants.fonction}" class="text-danger"></span>
+								th:value="${participantEdit.fonction}"> <span
+								th:errors="${participantEdit.fonction}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Presentation</label> <input
-								class="form-control" type="text" name="presentation"
-								th:value="${participants.presentation}"> <span
-								th:errors="${participants.presentation}" class="text-danger"></span>
+							<label class="control-label">Secteur</label> <input
+								class="form-control" type="text" name="secteur"
+								th:value="${participantEdit.secteur}"> <span
+								th:errors="${participantEdit.secteur}" class="text-danger"></span>
 						</div>
+		
+
 						<button type="submit" class="btn btn-primary">Enregistrer</button>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

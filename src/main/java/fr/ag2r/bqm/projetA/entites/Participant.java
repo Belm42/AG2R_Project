@@ -1,4 +1,4 @@
-package com.example.demo.entités;
+package fr.ag2r.bqm.projetA.entites;
 
 import java.io.Serializable;
 
@@ -7,69 +7,65 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.lang.NonNull;
-
 @Entity
-public class Participants implements Serializable {
+public class Participant implements Serializable {
 
     /** serialVersionUID  */
     private static final long serialVersionUID = 2789864048707708L;
-    
+
     // Déclaration des variables 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @NonNull
-    @Size(min = 2, max = 20)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String nom;
-    
-    @NonNull
-    @Size(min = 2, max = 20)
+
+    @NotNull
+    @Size(min = 2, max = 50)
     private String prenom;
-    @NonNull
-    @Size(min = 2, max = 20)
-    
+    @NotNull
+    @Size(min = 2, max = 50)
+
     private String entreprise;
-    @NonNull
-    @Size(min = 5, max = 20)
+    @NotNull
+    @Size(min = 5, max = 50)
     private String mail;
-    
-    @NonNull
-    @Size(min = 10, max = 11)
-    private String tel;
-    
-    @NonNull
-    @Size(min = 2, max = 20)
+
+    @NotNull
+    @Size(min = 1, max = 50)
     private String fonction;
-    
-    @NonNull
-    @Size(min = 5, max = 250)
-    private String presentation;
-    
-    // Un participant peut assister à plusieurs evenements.
-    //TODO by Djer le commentaire si dessus est FAUX. Cette association ce lit "Many (Particpant) To One (Evennement)". Si vous voulez qu'un particpants puisse participer à plusieurs Evennlment il faut une Liste d'Event ici aussi (une relation "ManytoMany")
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    private String secteur;
+
+    // Plusieurs participants peuvent assister à un evenements.
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEvenement")
     private Evenement evenement;
 
     // Générer un constructeurs par défaut (Sans parametres) pour JPA.
-    public Participants() {
+    public Participant() {
         super();
     }
 
-    public Participants(String nom, String prenom, String entreprise, String mail, String tel, String fonction,
-            String presentation, Evenement evenement) {
+    public Participant(String nom, String prenom, String entreprise, String mail, String fonction, String secteur,
+            Evenement evenement) {
         super();
         this.nom = nom;
         this.prenom = prenom;
         this.entreprise = entreprise;
         this.mail = mail;
-        this.tel = tel;
         this.fonction = fonction;
-        this.presentation = presentation;
+        this.secteur = secteur;
         this.evenement = evenement;
         //TODO by Djer : comme vous avez un  lien bi-directionnel JPA entre Evennement et Participant il faut penser à faire lien (si CE participants n'est pas dans la liste des participants de l'Evennement, l'ajouter, sinon .... ??) : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
     }
@@ -77,14 +73,14 @@ public class Participants implements Serializable {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -145,20 +141,6 @@ public class Participants implements Serializable {
     }
 
     /**
-     * @return the tel
-     */
-    public String getTel() {
-        return tel;
-    }
-
-    /**
-     * @param tel the tel to set
-     */
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    /**
      * @return the fonction
      */
     public String getFonction() {
@@ -175,15 +157,29 @@ public class Participants implements Serializable {
     /**
      * @return the presentation
      */
-    public String getPresentation() {
-        return presentation;
+    public String getSecteur() {
+        return secteur;
     }
 
     /**
      * @param presentation the presentation to set
      */
-    public void setPresentation(String présentation) {
-        this.presentation = présentation;
+    public void setSecteur(String secteur) {
+        this.secteur = secteur;
+    }
+
+    /**
+     * @return the evenement
+     */
+    public Evenement getEvenement() {
+        return evenement;
+    }
+
+    /**
+     * @param evenement the evenement to set
+     */
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
     }
 
 }

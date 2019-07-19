@@ -4,17 +4,18 @@
 	layout:decorate="layout">
 <head>
 <meta charset="utf-8">
-<title>Participants</title>
+<title>Evenements</title>
 
 </head>
 <body>
+
 	<div layout:fragment="content">
 		<!-- céation d'un tableau pour stocker les participants -->
 		<div class="container">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Liste des participants</div>
+				<div class="panel-heading">Liste des evenements</div>
 				<div class="panel-body">
-					<form th:action="@{/user/participant/index}" method="get">
+					<form th:action="@{/user/event/index}" method="get">
 						<!--  post en version finale !!!! -->
 						<label> Recherche par nom</label> <input type="text" name="motCle"
 							th:value="${motCle}">
@@ -23,48 +24,49 @@
 								src="https://img.icons8.com/color/48/000000/search-property.png"
 								width="23px">
 						</button>
-
 					</form>
 				</div>
 				<div class="panel-body">
 					<table class="table">
 						<tr>
+
+							<th>Date</th>
 							<th>Nom</th>
-							<th>Prenom</th>
-							<th>Entreprise</th>
-							<th>Mail</th>
-							<th>Fonction</th>
-							<th>Secteur</th>
+							<th>Nombre participant</th>
+							<th>Nombre participant par table</th>
+							<th>Nombre table</th>
+							<th>Gerer</th>
 							<th>Editer</th>
 							<th>Supprimer</th>
 						</tr>
-						<tr th:each="p:${listeParticipants}">
-							<td th:text="${p.nom}"></td>
-							<td th:text="${p.prenom}"></td>
-							<td th:text="${p.entreprise}"></td>
-							<td th:text="${p.mail}"></td>
-							<td th:text="${p.fonction}"></td>
-							<td th:text="${p.secteur}"></td>
+						<tr th:each="event:${listeEvenements}">
+							<td th:text="${event.dateEvenement}"></td>
+							<td th:text="${event.nomEvenement}"></td>
 
-							
-
-
-							<td><a th:href="@{/admin/participant/edit(id=${p.id})}"
+							<td th:text="${event.nombreParticipant}"></td>
+							<td th:text="${event.nombreParticipantTable}"></td>
+							<td th:text="${event.nombreTable}"></td>
+							<td><a th:href="@{/admin/event/manage(id=${event.idEvenement})}" title="manage"><img
+									src="https://img.icons8.com/dusk/64/000000/admin-settings-male.png"
+									width="30px"></a></td>
+							<td><a
+								th:href="@{/admin/event/edit(id=${event.idEvenement})}"
 								title="Edit"> <img
 									src="https://img.icons8.com/color/48/000000/create-new.png"
 									width="30px"></a></td>
 							<td><a
 								onclick="return confirm('Êtes-vous sûr de vouloir supprimer?')"
-								th:href="@{/admin/participant/delete(id=${p.id}, page=${currentPage}, motCle=${motCle})}"
+								th:href="@{/admin/event/delete(id=${event.idEvenement}, page=${currentPage}, motCle=${motCle})}"
 								title="Delete"> <img
 									src="https://img.icons8.com/color/48/000000/delete-forever.png"
 									width="30px"></a></td>
+
 						</tr>
 					</table>
 					<ul class="nav nav-pills">
 						<li th:class="${currentPage==status.index}?'active':''"
 							th:each="page,status:${pages}"><a
-							th:href="@{/user/participant/index(page=${status.index}, motCle=${motCle})}"
+							th:href="@{/user/event/index(page=${status.index}, motCle=${motCle})}"
 							th:text="${status.index}"></a></li>
 
 					</ul>
@@ -73,5 +75,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
