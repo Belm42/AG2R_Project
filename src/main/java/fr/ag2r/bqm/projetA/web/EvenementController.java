@@ -1,6 +1,8 @@
 
 package fr.ag2r.bqm.projetA.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.ag2r.bqm.projetA.dao.EvenementRepository;
+import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
 import fr.ag2r.bqm.projetA.entites.Evenement;
+import fr.ag2r.bqm.projetA.entites.Participant;
 
 @Controller
 public class EvenementController {
     @Autowired
     private EvenementRepository eventRepository;
+    @Autowired
+    private ParticipantRepository participantRepo;
 
     @RequestMapping("user/event/index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
@@ -59,11 +65,41 @@ public class EvenementController {
     }
 
     @GetMapping("/admin/event/manage")
-    public String manage(Model model, Integer id) {
+    public String manage(Model model, Integer id, Participant participant,
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "motCle", defaultValue = "") String motCle) {
+        List<Participant> participantManage = participantRepo.findByEvenement(null);
         Evenement evenementManage = eventRepository.findById(id).get();
+        model.addAttribute("participantManage", participantManage);
         model.addAttribute("evenementManage", evenementManage);
         //Un sous dossier dans "template" serais plsu claire.
         return "manageEvenement";
+    }
+
+    @RequestMapping("/admin/event/addPart")
+    public String addPart(Model model, Integer idevenement, Integer idparticipant) {
+        Evenement evenementaddpart = eventRepository.findById(idevenement).get();
+        Participant participantadd = participantRepo.findById(idparticipant).get();
+        evenementaddpart.addParticipant(participantadd);
+        participantRepo.save(participantadd);
+        eventRepository.save(evenementaddpart);
+        //Un sous dossier dans "template" serais plsu claire.
+
+        return "redirect:/user/event/index";
+
+    }
+
+    @RequestMapping("/admin/event/removePart")
+    public String manage(Model model, Integer idevenement, Integer idparticipant) {
+        Evenement evenementaddpart = eventRepository.findById(idevenement).get();
+        Participant participantadd = participantRepo.findById(idparticipant).get();
+        evenementaddpart.removePaticipant(participantadd);
+        participantRepo.save(participantadd);
+        eventRepository.save(evenementaddpart);
+        //Un sous dossier dans "template" serais plsu claire.
+
+        return "redirect:/user/event/index";
+
     }
 
     @PostMapping("/admin/event/save")

@@ -67,11 +67,9 @@ public class Participant implements Serializable {
         this.fonction = fonction;
         this.secteur = secteur;
         this.evenement = evenement;
-        //TODO by Djer : comme vous avez un  lien bi-directionnel JPA entre Evennement et Participant il faut penser à faire lien (si CE participants n'est pas dans la liste des participants de l'Evennement, l'ajouter, sinon .... ??) : https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
         //Vérifie si la liste des participants de l'Evennement contient "this", si NON : 
         //Ajoute un "evenement.addParticipant(this)".
-                
-        //Delus ton Evennement est "optionnelle" comem tu créé d'abord des participants, puis que tu les affects ENSUITE à un évènnements. Ce parametre devrait donc pouvour etre optionnel (ou à minima ne "rien faire" s'il est NULL). en JAVA on ne créé pas de "paramètre optionel" mais deux méthode (ici deux contructeur) un avec le paramètre et l'autre sans. Java sauras sélectionenr le bon en fonction des paramètres fourni lors de l'appel (surcharge de méthode/constructeur)
+
     }
 
     /**

@@ -23,6 +23,8 @@ public class ParticipantController {
     @Autowired
     private ParticipantRepository participantRepository;
 
+    private Evenement evenementEntity;
+
     //Dans le controller on doit creer des methodes
 
     @RequestMapping("/user/participant/index") //"/user/index"
@@ -56,8 +58,6 @@ public class ParticipantController {
     public String edit(Model model, Integer id) {
         //TODO by Djer : peut renvoyer "null", il faudrait vérifier avant d'ajouter : Javadoc : "Returns:the entity with the given id or Optional#empty() if none found"
         Participant participantEdit = participantRepository.findById(id).get();
-        Evenement event = new Evenement();
-        event.addParticipant(participantEdit);
         model.addAttribute("participantEdit", participantEdit);
         return "editParticipant";
     }

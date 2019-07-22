@@ -16,7 +16,6 @@
 					Liste des participants a l'évenement <a
 						th:text="${evenementManage.nomEvenement}"></a>
 				</div>
-				<div class="panel-body"></div>
 				<div class="panel-body">
 					<table class="table">
 						<tr>
@@ -24,26 +23,52 @@
 							<th>Prénom</th>
 							<th>Entreprise</th>
 							<th>Fonction</th>
+							<th>Supprimer</th>
 						</tr>
 						<tr th:each="participant :${evenementManage.participants}">
 							<td th:text="${participant.nom}"></td>
 							<td th:text="${participant.prenom}"></td>
 							<td th:text="${participant.entreprise}"></td>
 							<td th:text="${participant.fonction}"></td>
+							<td><a
+								th:href="@{/admin/event/removePart(idevenement=${evenementManage.idEvenement},idparticipant=${participant.id})}"
+								class="btn btn-primary"><img src="https://img.icons8.com/cotton/64/000000/delete-sign--v2.png"
+									width="23px"> </a></td>
 
 
 
 						</tr>
 					</table>
-					<ul class="nav nav-pills">
-						<li th:class="${currentPage==status.index}?'active':''"
-							th:each="page,status:${pages}"><a
-							th:href="@{/user/event/index(page=${status.index}, motCle=${motCle})}"
-							th:text="${status.index}"></a></li>
 
-					</ul>
+
 				</div>
+				<div class="panel-heading">Liste des participants pouvant être
+					ajoutés</div>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<th>Nom</th>
+							<th>Prénom</th>
+							<th>Entreprise</th>
+							<th>Fonction</th>
+							<th>Ajouter</th>
+						</tr>
+						<tr th:each="participant :${participantManage}">
+							<td th:text="${participant.nom}"></td>
+							<td th:text="${participant.prenom}"></td>
+							<td th:text="${participant.entreprise}"></td>
+							<td th:text="${participant.fonction}"></td>
+							<td><a
+								th:href="@{/admin/event/addPart(idevenement=${evenementManage.idEvenement},idparticipant=${participant.id})}"
+								class="btn btn-primary"><img
+									src="https://img.icons8.com/dusk/64/000000/add-user-group-woman-man.png"
+									width="23px"> </a></td>
 
+
+
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
