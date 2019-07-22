@@ -23,9 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         BCryptPasswordEncoder bcpe = getBCPE();
-        /*auth.inMemoryAuthentication().withUser("admin").password(bcpe.encode("1234")).roles("ADMIN", "USER");
-        auth.inMemoryAuthentication().withUser("user").password(bcpe.encode("1234")).roles("USER");
-        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder());*/
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(

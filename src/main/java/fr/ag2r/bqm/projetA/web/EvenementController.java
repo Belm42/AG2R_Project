@@ -25,7 +25,7 @@ public class EvenementController {
     @RequestMapping("user/event/index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
-        Page<Evenement> pageEvenement = eventRepository.findBynomEvenementContainsIgnoreCase(motCle,
+        Page<Evenement> pageEvenement = eventRepository.findByNomEvenementContainsIgnoreCase(motCle,
                 PageRequest.of(page, 10));
         model.addAttribute("listeEvenements", pageEvenement.getContent());
         model.addAttribute("pages", new Integer[pageEvenement.getTotalPages()]);
@@ -43,19 +43,18 @@ public class EvenementController {
         return "redirect:/user/event/index?page =" + page + "&motCle=" + motCle;
     }
 
-    //TODO bu Djer : pourrait être sur "/admin/event/create" pour être plus claire.
-    @GetMapping("/admin/event/formEvenement")
-    public String form(Model model) {
+    @GetMapping("/admin/event/create")
+    public String create(Model model) {
         model.addAttribute("evenement", new Evenement());
         //Un sous dossier dans "template" serais plsu claire.
-        return "formEvenement";
+        return "createEvenement";
     }
 
     @GetMapping("/admin/event/edit")
     public String edit(Model model, Integer id) {
         Evenement evenementEdit = eventRepository.findById(id).get();
         model.addAttribute("evenementEdit", evenementEdit);
-      //Un sous dossier dans "template" serais plsu claire.
+        //Un sous dossier dans "template" serais plsu claire.
         return "editEvenement";
     }
 
@@ -63,17 +62,16 @@ public class EvenementController {
     public String manage(Model model, Integer id) {
         Evenement evenementManage = eventRepository.findById(id).get();
         model.addAttribute("evenementManage", evenementManage);
-      //Un sous dossier dans "template" serais plsu claire.
+        //Un sous dossier dans "template" serais plsu claire.
         return "manageEvenement";
     }
 
     @PostMapping("/admin/event/save")
     public String save(Model model, @Valid Evenement evenement, BindingResult bindingResult) {
         //TODO by Djer : Evite les multiples return. Avec une variable "templateName" que tu valorise dans le if ca marchera aussi
-        if (bindingResult.hasErrors())
-            //N'utilise JAMAIS cette syntaxe de if "sans les acollades". A la limite configure le formatter d'Eclispe pour qu'il ajoute les acollades.
-            return "formEvenement";
-
+        if (bindingResult.hasErrors()) {
+            return "createEvenement";
+        }
         eventRepository.save(evenement);
         return "redirect:/user/event/index";
     }

@@ -25,7 +25,6 @@ public class ParticipantController {
 
     //Dans le controller on doit creer des methodes
 
-    //TODO by Djer : ce code est dans un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si on consulte l'index d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
     @RequestMapping("/user/participant/index") //"/user/index"
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
@@ -47,11 +46,10 @@ public class ParticipantController {
         return "redirect:/user/participant/index?page =" + page + "&motCle=" + motCle;
     }
 
-    //TODO by Djer : "create" serait plus claire comme URL et comme nom de méthode.
-    @GetMapping("/admin/participant/formParticipant")
+    @GetMapping("/admin/participant/create")
     public String form(Model model) {
         model.addAttribute("participants", new Participant());
-        return "formParticipant";
+        return "createParticipant";
     }
 
     @GetMapping("/admin/participant/edit")
@@ -66,33 +64,13 @@ public class ParticipantController {
 
     @PostMapping("/admin/participant/save")
     public String save(Model model, @Valid Participant participants, BindingResult bindingResult) {
-      //TODO by Djer : Evite les multiples return. Avec une variable "templateName" que tu valorise dans le if ca marchera aussi
-        if (bindingResult.hasErrors())
-          //N'utilise JAMAIS cette syntaxe de if "sans les acollades". A la limite configure le formatter d'Eclispe pour qu'il ajoute les acollades.
-            return "formParticipant";
-
+        String templateName = new String();
+        //TODO by Djer : Evite les multiples return. Avec une variable "templateName" que tu valorise dans le if ca marchera aussi
+        if (bindingResult.hasErrors()) {
+            return "createParticipant";
+        }
         participantRepository.save(participants);
         return "redirect:/user/participant/index";
-    }
-    
-    //TODO by Djer : les 3 méthdoes ci-dessous pourrait être délcarées dans un controller dédié 'GeneralController" ou un truc du genre.
-
-    @GetMapping("/")
-    public String def() {
-
-        return "redirect:/user/event/index";
-    }
-
-    @GetMapping("/403")
-    public String notAutorized() {
-
-        return "403";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-
-        return "login";
     }
 
 }

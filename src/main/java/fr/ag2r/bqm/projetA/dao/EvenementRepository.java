@@ -8,7 +8,6 @@ import fr.ag2r.bqm.projetA.entites.Evenement;
 
 public interface EvenementRepository extends JpaRepository<Evenement, Integer> {
 
-    //TODO by Djer : Il devrait y avoir un "N" majuscule pour "nomEv..."
-    public Page<Evenement> findBynomEvenementContainsIgnoreCase(String motCle, Pageable peageable);
+    public Page<Evenement> findByNomEvenementContainsIgnoreCase(String motCle, Pageable peageable);
 
 }
