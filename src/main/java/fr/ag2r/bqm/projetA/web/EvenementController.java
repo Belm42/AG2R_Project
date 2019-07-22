@@ -32,6 +32,7 @@ public class EvenementController {
         model.addAttribute("currentPage", page);
         model.addAttribute("motCle", motCle);
 
+        //TODO by Djer : il est possible de crée des "sous-dossier" dnas le dossier template (par exemple un sous dossier "event", et de le référencer ici "event/searchResult" par exemple)
         return "evenement";
 
     }
@@ -42,9 +43,11 @@ public class EvenementController {
         return "redirect:/user/event/index?page =" + page + "&motCle=" + motCle;
     }
 
+    //TODO bu Djer : pourrait être sur "/admin/event/create" pour être plus claire.
     @GetMapping("/admin/event/formEvenement")
     public String form(Model model) {
         model.addAttribute("evenement", new Evenement());
+        //Un sous dossier dans "template" serais plsu claire.
         return "formEvenement";
     }
 
@@ -52,6 +55,7 @@ public class EvenementController {
     public String edit(Model model, Integer id) {
         Evenement evenementEdit = eventRepository.findById(id).get();
         model.addAttribute("evenementEdit", evenementEdit);
+      //Un sous dossier dans "template" serais plsu claire.
         return "editEvenement";
     }
 
@@ -59,12 +63,15 @@ public class EvenementController {
     public String manage(Model model, Integer id) {
         Evenement evenementManage = eventRepository.findById(id).get();
         model.addAttribute("evenementManage", evenementManage);
+      //Un sous dossier dans "template" serais plsu claire.
         return "manageEvenement";
     }
 
     @PostMapping("/admin/event/save")
     public String save(Model model, @Valid Evenement evenement, BindingResult bindingResult) {
+        //TODO by Djer : Evite les multiples return. Avec une variable "templateName" que tu valorise dans le if ca marchera aussi
         if (bindingResult.hasErrors())
+            //N'utilise JAMAIS cette syntaxe de if "sans les acollades". A la limite configure le formatter d'Eclispe pour qu'il ajoute les acollades.
             return "formEvenement";
 
         eventRepository.save(evenement);

@@ -25,7 +25,7 @@ public class ParticipantController {
 
     //Dans le controller on doit creer des methodes
 
-    //TODO by Djer : ce code est dasn un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si un consul l'inden d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
+    //TODO by Djer : ce code est dans un controller "Participant" mais rien dans l'URL ne l'indique (on ne sait pas si on consulte l'index d'un Evennement, d'un aprticipants, d'un truc "plus général". Pensser à precciser "/user|admin\participant|evennement/xxxxxx.
     @RequestMapping("/user/participant/index") //"/user/index"
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "motCle", defaultValue = "") String motCle) {
@@ -47,6 +47,7 @@ public class ParticipantController {
         return "redirect:/user/participant/index?page =" + page + "&motCle=" + motCle;
     }
 
+    //TODO by Djer : "create" serait plus claire comme URL et comme nom de méthode.
     @GetMapping("/admin/participant/formParticipant")
     public String form(Model model) {
         model.addAttribute("participants", new Participant());
@@ -55,6 +56,7 @@ public class ParticipantController {
 
     @GetMapping("/admin/participant/edit")
     public String edit(Model model, Integer id) {
+        //TODO by Djer : peut renvoyer "null", il faudrait vérifier avant d'ajouter : Javadoc : "Returns:the entity with the given id or Optional#empty() if none found"
         Participant participantEdit = participantRepository.findById(id).get();
         Evenement event = new Evenement();
         event.addParticipant(participantEdit);
@@ -64,12 +66,16 @@ public class ParticipantController {
 
     @PostMapping("/admin/participant/save")
     public String save(Model model, @Valid Participant participants, BindingResult bindingResult) {
+      //TODO by Djer : Evite les multiples return. Avec une variable "templateName" que tu valorise dans le if ca marchera aussi
         if (bindingResult.hasErrors())
+          //N'utilise JAMAIS cette syntaxe de if "sans les acollades". A la limite configure le formatter d'Eclispe pour qu'il ajoute les acollades.
             return "formParticipant";
 
         participantRepository.save(participants);
         return "redirect:/user/participant/index";
     }
+    
+    //TODO by Djer : les 3 méthdoes ci-dessous pourrait être délcarées dans un controller dédié 'GeneralController" ou un truc du genre.
 
     @GetMapping("/")
     public String def() {
