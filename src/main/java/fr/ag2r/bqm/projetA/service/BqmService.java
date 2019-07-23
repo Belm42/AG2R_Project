@@ -5,61 +5,99 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.ag2r.bqm.projetA.web.ListeChifre;
+import fr.ag2r.bqm.projetA.entites.Participant;
 
 @Service
 public class BqmService {
-    //TODO by Djer : un Controller est un "Singleton" TOUS tes utilsiateur vont utilsie la même instance. EN générale on PAS d'attribbut pour "stocker" un etat dans les controller
-    private Integer nombreTable = 5; //devrait etre lut en BDD à partir d'un ID d'evennement
-    private Integer nombrePersonne = nombreTable * nombreTable; //devrait etre lut en BDD à partir d'un ID d'evennement
-    private Integer nombrePersonneParTable = nombreTable; //Le nombre de personne par table soit égal au nombre de tables.
-    private List<Integer> list = new ArrayList<>(); //A déclarer dans la méthode qui l'utilise, cela tévitera en plus des "clear" systématiques
-    private Integer nombreTour = nombreTable; //A mettre ailleur, mais je ne sait pas trop ou, je ne le compre pas trop. (semble être la "durée" d'un tour de table ?)
-    private List<ListeChifre> youpi = new ArrayList<ListeChifre>();//A déclarer dans la méthode qui l'utilise, cela tévitera en plus des "clear" systématiques
+    private Integer nombreTable;
+    private Integer nombrePersonne;
+    private Integer nombrePersonneParTable;
 
-    public List<ListeChifre> bqmRotation() {
-        list.clear();
-        youpi.clear();
-        for (int i = 0; i < nombrePersonne; i++) {
+    public List<List<List<Participant>>> bqmRotation(List<Participant> participantBqm) {
+        List<Participant> listParticipantTotal = new ArrayList<>();
+        List<List<Participant>> listAffichage = new ArrayList<List<Participant>>();
+        List<List<List<Participant>>> listAffichageFinal = new ArrayList<List<List<Participant>>>();
 
-            list.add(i + 1);
+        for (Participant participant : participantBqm) {
+
+            listParticipantTotal.add(participant);
         }
+        firstRotation(listParticipantTotal, listAffichage);
+        logicalRotation(listAffichage, listParticipantTotal);
+        displayRotation(listAffichage, listAffichageFinal);
+        return listAffichageFinal;
+    }
+
+    public void firstRotation(List<Participant> listParticipantTotal, List<List<Participant>> listMiddle) {
         int fromIndex = 0;
         int toIndex = nombrePersonneParTable;
-        //TODO by Djer non de varaible pas très claire....
-        List<List<Integer>> listDeListe = new ArrayList<List<Integer>>();
         for (int r = 1; r <= nombreTable; r++) {
-            ListeChifre subListe = new ListeChifre();
-            subListe.listChiffre = list.subList(fromIndex, toIndex);
+            List<Participant> subListe = new ArrayList<Participant>();
+            subListe = listParticipantTotal.subList(fromIndex, toIndex);
             fromIndex += nombrePersonneParTable;
             toIndex += nombrePersonneParTable;
-            listDeListe.add(subListe.listChiffre);
             // Essayer de formater la phrase.
-            youpi.add(subListe);
+            listMiddle.add(subListe);
         }
-        for (int k = 0; k < nombreTour; k++) {
-            //TODO by Djer : pas de SysOut sur un Serveur !!
-            System.out.println("-------------------");
-            System.out.println("rotation " + (k + 1));
+    }
+
+    public void logicalRotation(List<List<Participant>> listMiddle, List<Participant> listParticipantTotal) {
+        for (int k = 0; k < nombreTable; k++) {
             for (int j = 0; j < nombreTable; j++) {
-                ListeChifre subListe2 = new ListeChifre();
+                List<Participant> subListe2 = new ArrayList<Participant>();
                 int suiteNombre = 0;
                 int limiteTable = 0;
                 for (int i = 0; i < nombrePersonneParTable; i++) {
                     limiteTable += nombrePersonneParTable;
-                    int somme = j + suiteNombre;
-                    while (limiteTable <= somme) {
-                        somme = somme - nombrePersonneParTable;
+                    int indexParticipant = j + suiteNombre;
+                    while (limiteTable <= indexParticipant) {
+                        indexParticipant = indexParticipant - nombrePersonneParTable;
                     }
-                    Integer valeur = list.get(somme);
-                    subListe2.listChiffre.add(valeur);
+                    Participant participant = listParticipantTotal.get(indexParticipant);
+                    subListe2.add(participant);
                     suiteNombre += (nombreTable + k);
 
                 }
-                youpi.add(subListe2);
-
+                listMiddle.add(subListe2);
             }
         }
-        return youpi;
+    }
+
+    public void displayRotation(List<List<Participant>> listMiddle, List<List<List<Participant>>> listAffichage) {
+
+        int fromIndex = 0;
+        int toIndex = nombrePersonneParTable;
+        for (int r = 0; r <= nombreTable; r++) {
+            List<List<Participant>> subListe = new ArrayList<List<Participant>>();
+            subListe = listMiddle.subList(fromIndex, toIndex);
+            fromIndex += nombrePersonneParTable;
+            toIndex += nombrePersonneParTable;
+            listAffichage.add(subListe);
+        }
+
+    }
+
+    public Integer getNombreTable() {
+        return nombreTable;
+    }
+
+    public Integer getNombrePersonne() {
+        return nombrePersonne;
+    }
+
+    public Integer getNombrePersonneParTable() {
+        return nombrePersonneParTable;
+    }
+
+    public void setNombreTable(Integer nombreTable) {
+        this.nombreTable = nombreTable;
+    }
+
+    public void setNombrePersonne(Integer nombrePersonne) {
+        this.nombrePersonne = nombrePersonne;
+    }
+
+    public void setNombrePersonneParTable(Integer nombrePersonneParTable) {
+        this.nombrePersonneParTable = nombrePersonneParTable;
     }
 }

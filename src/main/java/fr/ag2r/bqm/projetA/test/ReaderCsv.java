@@ -18,7 +18,8 @@ public class ReaderCsv {
 
         while (scanner.hasNext()) {
             List<String> list = new ArrayList<>();
-            String[] line = (scanner.next().split(","));
+            // Virgule ou point virgule selon le formatage de base
+            String[] line = (scanner.next().split(";"));
             // Faire liste pour chaque donné dans une ligne
             for (String wordInLine : line) {
                 list.add(wordInLine);

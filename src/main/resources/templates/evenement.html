@@ -10,7 +10,6 @@
 <body>
 
 	<div layout:fragment="content">
-		<!-- céation d'un tableau pour stocker les participants -->
 		<div class="container">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Liste des evenements</div>
@@ -19,7 +18,7 @@
 						<!--  post en version finale !!!! -->
 						<label> Recherche par nom</label> <input type="text" name="motCle"
 							th:value="${motCle}">
-							<!-- TODO by Djer : copie/colel cette image dasn ton "static/images" plutot que d'utilsier l'URL. Si tu utilses des ressoruces externe utile un CDN ! -->
+						<!-- TODO by Djer : copie/colel cette image dasn ton "static/images" plutot que d'utilsier l'URL. Si tu utilses des ressoruces externe utile un CDN ! -->
 						<button type="submit" class="btn btn-primary">
 							Chercher <img
 								src="https://img.icons8.com/color/48/000000/search-property.png"
@@ -30,12 +29,12 @@
 				<div class="panel-body">
 					<table class="table">
 						<tr>
-
 							<th>Date</th>
 							<th>Nom</th>
 							<th>Nombre participant</th>
 							<th>Nombre participant par table</th>
 							<th>Nombre table</th>
+							<th>Bqm</th>
 							<th>Gerer</th>
 							<th>Editer</th>
 							<th>Supprimer</th>
@@ -43,11 +42,16 @@
 						<tr th:each="event:${listeEvenements}">
 							<td th:text="${event.dateEvenement}"></td>
 							<td th:text="${event.nomEvenement}"></td>
-
 							<td th:text="${event.nombreParticipant}"></td>
 							<td th:text="${event.nombreParticipantTable}"></td>
 							<td th:text="${event.nombreTable}"></td>
-							<td><a th:href="@{/admin/event/manage(id=${event.idEvenement})}" title="manage"><img
+							<td><a th:href="@{/user/event/bqm(id=${event.idEvenement})}"
+								title="manage"><img
+									src="https://img.icons8.com/officel/16/000000/meeting-room.png"
+									width="30px"></a></td>
+							<td><a
+								th:href="@{/admin/event/manage(id=${event.idEvenement})}"
+								title="manage"><img
 									src="https://img.icons8.com/dusk/64/000000/admin-settings-male.png"
 									width="30px"></a></td>
 							<td><a
@@ -61,7 +65,6 @@
 								title="Delete"> <img
 									src="https://img.icons8.com/color/48/000000/delete-forever.png"
 									width="30px"></a></td>
-
 						</tr>
 					</table>
 					<ul class="nav nav-pills">
@@ -72,10 +75,8 @@
 
 					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

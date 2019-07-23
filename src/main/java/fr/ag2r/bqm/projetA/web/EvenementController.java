@@ -26,7 +26,7 @@ public class EvenementController {
     @Autowired
     private EvenementRepository eventRepository;
     @Autowired
-    private ParticipantRepository participantRepo;
+    private ParticipantRepository participantRepository;
 
     @RequestMapping("user/event/index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
@@ -65,10 +65,8 @@ public class EvenementController {
     }
 
     @GetMapping("/admin/event/manage")
-    public String manage(Model model, Integer id, Participant participant,
-            @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "motCle", defaultValue = "") String motCle) {
-        List<Participant> participantManage = participantRepo.findByEvenement(null);
+    public String manage(Model model, Integer id) {
+        List<Participant> participantManage = participantRepository.findByEvenement(null);
         Evenement evenementManage = eventRepository.findById(id).get();
         model.addAttribute("participantManage", participantManage);
         model.addAttribute("evenementManage", evenementManage);
@@ -79,9 +77,9 @@ public class EvenementController {
     @RequestMapping("/admin/event/addPart")
     public String addPart(Model model, Integer idevenement, Integer idparticipant) {
         Evenement evenementaddpart = eventRepository.findById(idevenement).get();
-        Participant participantadd = participantRepo.findById(idparticipant).get();
+        Participant participantadd = participantRepository.findById(idparticipant).get();
         evenementaddpart.addParticipant(participantadd);
-        participantRepo.save(participantadd);
+        participantRepository.save(participantadd);
         eventRepository.save(evenementaddpart);
         //Un sous dossier dans "template" serais plsu claire.
 
@@ -92,9 +90,9 @@ public class EvenementController {
     @RequestMapping("/admin/event/removePart")
     public String manage(Model model, Integer idevenement, Integer idparticipant) {
         Evenement evenementaddpart = eventRepository.findById(idevenement).get();
-        Participant participantadd = participantRepo.findById(idparticipant).get();
+        Participant participantadd = participantRepository.findById(idparticipant).get();
         evenementaddpart.removePaticipant(participantadd);
-        participantRepo.save(participantadd);
+        participantRepository.save(participantadd);
         eventRepository.save(evenementaddpart);
         //Un sous dossier dans "template" serais plsu claire.
 
