@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.test;
+package fr.ag2r.bqm.projetA.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,22 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ReaderCsv {
-    static List<List<String>> listDeListe = new ArrayList<List<String>>();
+public class CsvService {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    List<List<String>> listDeListe = new ArrayList<List<String>>();
+
+    public void csvReader() throws FileNotFoundException {
 
         Scanner scanner = new Scanner(new File("\\Users\\house\\OneDrive\\Bureau\\employees.csv"));
         Integer line = countLine(scanner);
-        scanner.close();
-        scanner = new Scanner(new File("\\Users\\house\\OneDrive\\Bureau\\employees.csv"));
         wordList(scanner);
-        scanner.close();
         displayList(line);
+        scanner.close();
 
     }
 
-    public static Integer countLine(Scanner scanner) throws FileNotFoundException {
+    public Integer countLine(Scanner scanner) throws FileNotFoundException {
 
         Integer count = 0;
         while (scanner.hasNextLine()) {
@@ -31,7 +30,7 @@ public class ReaderCsv {
         return count;
     }
 
-    public static void wordList(Scanner scanner) {
+    public void wordList(Scanner scanner) {
         scanner.useDelimiter("\n");
 
         while (scanner.hasNext()) {
@@ -46,15 +45,15 @@ public class ReaderCsv {
         }
     }
 
-    public static void displayList(Integer line) {
+    public void displayList(Integer line) {
         //Récuperer les données de chaque ligne d'une colonne.
-        for (int j = 0; j < 6; j++) {
+        for (int j = 0; j < 5; j++) {
             List<String> list2 = new ArrayList<>();
             for (int i = 1; i < line; i++) {
 
                 list2.add(listDeListe.get(i).get(j));
             }
-            System.out.println(list2.get(0));
+            System.out.println(list2);
         }
 
     }
