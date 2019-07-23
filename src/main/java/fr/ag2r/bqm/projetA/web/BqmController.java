@@ -7,20 +7,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fr.ag2r.bqm.projetA.dao.EvenementRepository;
+import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
+import fr.ag2r.bqm.projetA.entites.Evenement;
+import fr.ag2r.bqm.projetA.entites.Participant;
 import fr.ag2r.bqm.projetA.service.BqmService;
 
 @Controller
 public class BqmController {
-
+    @Autowired
+    ParticipantRepository participantRepository;
+    @Autowired
+    EvenementRepository eventRepository;
     @Autowired
     BqmService bqmService;
 
-    //TODO by Djer ajouté en paramètre de requete l'ID de l'évènnement pour lequel tu souhaites dérouler l'algo de rotation ? 
-    @RequestMapping("/user/algo/index")
-    public String rotation(final Model model) {
-        List<ListeChifre> bob;
-        bob = bqmService.bqmRotation();
-        model.addAttribute("youpi", bob);
-        return "algo";
+    @RequestMapping("/user/event/bqm")
+    public String rotation(Model model, Integer id) {
+        Evenement evenementBqm = eventRepository.findById(id).get();
+        List<Participant> participantBqm = evenementBqm.getParticipants();
+        bqmService.setNombrePersonne(evenementBqm.getNombreParticipant());
+        bqmService.setNombreTable(evenementBqm.getNombreTable());
+        bqmService.setNombrePersonneParTable(evenementBqm.getNombreParticipantTable());
+
+        //Un sous dossier dans "template" serais plsu claire.
+        List<List<List<Participant>>> bqmRotation;
+        bqmRotation = bqmService.bqmRotation(participantBqm);
+        model.addAttribute("bqmAttribut", evenementBqm);
+        model.addAttribute("bqmRotation", bqmRotation);
+        return "bqmAffichage";
     }
 }

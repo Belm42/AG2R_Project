@@ -8,34 +8,29 @@
 
 </head>
 <body>
-
 	<div layout:fragment="content">
 		<!-- céation d'un tableau pour stocker les participants -->
 		<div class="container">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Liste des evenements</div>
-				<div class="panel-body">
-		
-					<table class="table">
-						<tr th:each="liste :${youpi}">
-							<th:block th:each="chiffre :${liste.listChiffre}">
-							<td th:text="${chiffre}"></td>
+				<div class="panel-heading">Rotation de l'évenement </div>
+				<div class="panel-body" th:each="rotation :${bqmRotation}">
+					<table class="col-md-12">
+						<tr class="table" th:each="table :${rotation}">
+							<th:block th:each="participants :${table}">
+								<td th:text="${participants.nom}"></td>
 							</th:block>
 						</tr>
 					</table>
-					
+
 					<ul class="nav nav-pills">
 						<li th:class="${currentPage==status.index}?'active':''"
 							th:each="page,status:${pages}"><a
 							th:href="@{/user/event/index(page=${status.index}, motCle=${motCle})}"
 							th:text="${status.index}"></a></li>
-
 					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
