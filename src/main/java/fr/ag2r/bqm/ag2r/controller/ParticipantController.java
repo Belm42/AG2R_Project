@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.web;
+package fr.ag2r.bqm.ag2r.controller;
 
 import javax.validation.Valid;
 
@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
-import fr.ag2r.bqm.projetA.entites.Evenement;
-import fr.ag2r.bqm.projetA.entites.Participant;
+import fr.ag2r.bqm.ag2r.dao.ParticipantRepository;
+import fr.ag2r.bqm.ag2r.entites.Participant;
 
 @Controller
 public class ParticipantController {
@@ -23,7 +22,7 @@ public class ParticipantController {
     @Autowired
     private ParticipantRepository participantRepository;
 
-    private Evenement evenementEntity;
+
 
     //Dans le controller on doit creer des methodes
 
@@ -39,7 +38,7 @@ public class ParticipantController {
         model.addAttribute("currentPage", page);
         model.addAttribute("motCle", motCle);
         // on revient sur la vue pour les afficher
-        return "participants";
+        return "displayParticipant";
     }
 
     @GetMapping("/admin/participant/delete")

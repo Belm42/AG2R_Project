@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.test;
+package fr.ag2r.bqm.ag2r.test;
 
 import java.util.ArrayList;
 import java.util.List;

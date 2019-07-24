@@ -1,5 +1,5 @@
 
-package fr.ag2r.bqm.projetA.web;
+package fr.ag2r.bqm.ag2r.controller;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.ag2r.bqm.projetA.dao.EvenementRepository;
-import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
-import fr.ag2r.bqm.projetA.entites.Evenement;
-import fr.ag2r.bqm.projetA.entites.Participant;
+import fr.ag2r.bqm.ag2r.dao.EvenementRepository;
+import fr.ag2r.bqm.ag2r.dao.ParticipantRepository;
+import fr.ag2r.bqm.ag2r.entites.Evenement;
+import fr.ag2r.bqm.ag2r.entites.Participant;
 
 @Controller
 public class EvenementController {
@@ -39,7 +39,7 @@ public class EvenementController {
         model.addAttribute("motCle", motCle);
 
         //TODO by Djer : il est possible de crée des "sous-dossier" dnas le dossier template (par exemple un sous dossier "event", et de le référencer ici "event/searchResult" par exemple)
-        return "evenement";
+        return "displayEvent";
 
     }
 
@@ -53,7 +53,7 @@ public class EvenementController {
     public String create(Model model) {
         model.addAttribute("evenement", new Evenement());
         //Un sous dossier dans "template" serais plsu claire.
-        return "createEvenement";
+        return "createEvent";
     }
 
     @GetMapping("/admin/event/edit")
@@ -61,7 +61,7 @@ public class EvenementController {
         Evenement evenementEdit = eventRepository.findById(id).get();
         model.addAttribute("evenementEdit", evenementEdit);
         //Un sous dossier dans "template" serais plsu claire.
-        return "editEvenement";
+        return "editEvent";
     }
 
     @GetMapping("/admin/event/manage")
@@ -71,7 +71,7 @@ public class EvenementController {
         model.addAttribute("participantManage", participantManage);
         model.addAttribute("evenementManage", evenementManage);
         //Un sous dossier dans "template" serais plsu claire.
-        return "manageEvenement";
+        return "manageEvent";
     }
 
     @RequestMapping("/admin/event/addPart")

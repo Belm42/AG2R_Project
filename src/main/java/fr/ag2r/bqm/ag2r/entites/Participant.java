@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.entites;
+package fr.ag2r.bqm.ag2r.entites;
 
 import java.io.Serializable;
 

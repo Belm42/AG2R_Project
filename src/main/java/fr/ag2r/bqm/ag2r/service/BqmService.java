@@ -1,11 +1,11 @@
-package fr.ag2r.bqm.projetA.service;
+package fr.ag2r.bqm.ag2r.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.ag2r.bqm.projetA.entites.Participant;
+import fr.ag2r.bqm.ag2r.entites.Participant;
 
 @Service
 public class BqmService {

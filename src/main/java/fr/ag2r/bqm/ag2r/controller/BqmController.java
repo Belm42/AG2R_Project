@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.web;
+package fr.ag2r.bqm.ag2r.controller;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fr.ag2r.bqm.projetA.dao.EvenementRepository;
-import fr.ag2r.bqm.projetA.dao.ParticipantRepository;
-import fr.ag2r.bqm.projetA.entites.Evenement;
-import fr.ag2r.bqm.projetA.entites.Participant;
-import fr.ag2r.bqm.projetA.service.BqmService;
+import fr.ag2r.bqm.ag2r.dao.EvenementRepository;
+import fr.ag2r.bqm.ag2r.dao.ParticipantRepository;
+import fr.ag2r.bqm.ag2r.entites.Evenement;
+import fr.ag2r.bqm.ag2r.entites.Participant;
+import fr.ag2r.bqm.ag2r.service.BqmService;
 
 @Controller
 public class BqmController {
@@ -33,8 +33,8 @@ public class BqmController {
         //Un sous dossier dans "template" serais plsu claire.
         List<List<List<Participant>>> bqmRotation;
         bqmRotation = bqmService.bqmRotation(participantBqm);
-        model.addAttribute("bqmAttribut", evenementBqm);
+        model.addAttribute("bqmEvent", evenementBqm);
         model.addAttribute("bqmRotation", bqmRotation);
-        return "bqmAffichage";
+        return "bqmDisplay";
     }
 }

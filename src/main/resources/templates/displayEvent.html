@@ -11,6 +11,15 @@
 
 	<div layout:fragment="content">
 		<div class="container">
+				<div class="well" style="background-color: #A2D9CE">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-6">
+						<h1>
+							<small>Liste des BQM</small>
+						</h1>
+					</div>
+				</div>
+			</div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">Liste des evenements</div>
 				<div class="panel-body">
@@ -72,7 +81,6 @@
 							th:each="page,status:${pages}"><a
 							th:href="@{/user/event/index(page=${status.index}, motCle=${motCle})}"
 							th:text="${status.index}"></a></li>
-
 					</ul>
 				</div>
 			</div>

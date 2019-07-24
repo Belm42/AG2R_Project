@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.web;
+package fr.ag2r.bqm.ag2r.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

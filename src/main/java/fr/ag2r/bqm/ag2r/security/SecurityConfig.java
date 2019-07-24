@@ -1,4 +1,4 @@
-package fr.ag2r.bqm.projetA.sec;
+package fr.ag2r.bqm.ag2r.security;
 
 import javax.sql.DataSource;
 
@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        BCryptPasswordEncoder bcpe = getBCPE();
+        @SuppressWarnings("unused")
+		BCryptPasswordEncoder bcpe = getBCPE();
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
